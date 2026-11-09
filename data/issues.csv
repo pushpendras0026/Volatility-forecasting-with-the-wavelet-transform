@@ -1,0 +1,6 @@
+"dataset","Date","issue","detail","severity"
+"tunisia",2011-01-31,"calendar_gap","17 calendar days since preceding observation; no interpolation","review"
+"tunisia",2004-09-15,"large_return","Log return -0.2669; preserved, source review recommended","review"
+"tunisia",2004-09-16,"large_return","Log return 0.2654; preserved, source review recommended","review"
+"india_infosys",2013-04-12,"large_return","Log return -0.2390; preserved, source review recommended","review"
+"india_infosys",2019-10-27,"weekend_observations","3 weekend-dated prices retained; verify market calendar","review"

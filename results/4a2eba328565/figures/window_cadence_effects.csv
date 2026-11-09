@@ -1,0 +1,13 @@
+"axis","value","pipeline","ratio","n_datasets"
+"window",768,"raw_garch",1.00857007204603,6
+"window",1536,"raw_garch",0.989835219955055,6
+"window",768,"dwt_garch",0.997029921232939,6
+"window",1536,"dwt_garch",0.999911072570174,6
+"window",768,"modwt_garch",1.01025624850335,6
+"window",1536,"modwt_garch",0.989577039693132,6
+"cadence",40,"raw_garch",1.00115881121843,6
+"cadence",60,"raw_garch",1.0003407166831,6
+"cadence",40,"dwt_garch",1.00043693571077,6
+"cadence",60,"dwt_garch",0.998122999694852,6
+"cadence",40,"modwt_garch",1.0005660343535,6
+"cadence",60,"modwt_garch",0.999706983702456,6

@@ -1,0 +1,7 @@
+"scenario","model","n_datasets","RMSE_ratio"
+"criterionBIC","raw_garch",6,0.998497329009085
+"criterionBIC","dwt_garch",6,0.996565454917642
+"criterionBIC","modwt_garch",6,0.999587268714232
+"order_cap5","raw_garch",6,1.00334383886738
+"order_cap5","dwt_garch",6,1.00136304781032
+"order_cap5","modwt_garch",6,1.00059569811865

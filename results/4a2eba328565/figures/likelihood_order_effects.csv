@@ -1,0 +1,6 @@
+"model_id","control","n_datasets","RMSE_ratio"
+"raw_garch_student_t","raw_garch",6,0.995236275093217
+"dwt_garch_student_t","dwt_garch",6,0.995216869282838
+"modwt_garch_student_t","modwt_garch",6,0.996709230275107
+"modwt_garch_structural","modwt_garch",6,1.00060795302637
+"modwt_garch_structural_student_t","modwt_garch",6,0.996972202161053

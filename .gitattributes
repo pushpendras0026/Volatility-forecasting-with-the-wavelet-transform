@@ -1,0 +1,4 @@
+# Data and checksum files are hashed byte-for-byte; never convert their line endings.
+*.csv -text
+*.rds binary
+*.png binary

@@ -1,0 +1,25 @@
+# R / Python / editor caches
+.Rhistory
+.RData
+.Rproj.user/
+__pycache__/
+*.pyc
+.venv/
+# run-time pointer written only while run.R is running
+results/RUNNING.txt
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.blg
+*.toc
+*.synctex.gz
+# unzipped raw outputs (restore them from the zipped/ folders)
+results/*/historical/
+results/*/later/
+Distribution/results/*/google_class_a/
+Distribution/results/*/india_infosys/
+Distribution/results/*/nigeria/
+Distribution/results/*/south_africa/
+Distribution/results/*/tunisia/
+Distribution/results/*/usa_ibm/

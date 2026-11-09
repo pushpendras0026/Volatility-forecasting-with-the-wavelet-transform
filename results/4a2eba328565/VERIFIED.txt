@@ -1,0 +1,1 @@
+PASS: 42 historical and 30 later jobs; six datasets; original fit-code/data checksums; chronological bounds; forecast coverage and moment identities; frozen choices/orders; exact ensemble membership.
