@@ -1,0 +1,7 @@
+"dataset","n","raw_garch","mlp_seed101","mlp_seed202","mlp_seed303","sample_rule"
+"south_africa",688,1.37705557973144,1.51939914672321,1.51397290391659,1.46476447924195,"dates on which raw_garch, mlp, mlp_seed202, mlp_seed303 and the three ensembles all succeeded"
+"tunisia",540,0.379417925576291,0.408256689765487,0.42005555386725,0.54133097047087,"dates on which raw_garch, mlp, mlp_seed202, mlp_seed303 and the three ensembles all succeeded"
+"nigeria",745,1.89201027340686,2.4043818346664,2.07675761131822,2.02557019298278,"dates on which raw_garch, mlp, mlp_seed202, mlp_seed303 and the three ensembles all succeeded"
+"india_infosys",199,23.1670018825426,33.2733771209928,24.0858118895865,33.2706621826427,"dates on which raw_garch, mlp, mlp_seed202, mlp_seed303 and the three ensembles all succeeded"
+"usa_ibm",751,4.12997265737003,4.21898631743338,4.16548106857526,4.2011264558648,"dates on which raw_garch, mlp, mlp_seed202, mlp_seed303 and the three ensembles all succeeded"
+"google_class_a",704,7.98979707241159,8.14532942316851,8.027026238185,8.08029164271103,"dates on which raw_garch, mlp, mlp_seed202, mlp_seed303 and the three ensembles all succeeded"

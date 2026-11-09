@@ -1,0 +1,13 @@
+dataset,profile,model_id,p,q,control,n,requested,MSE,improvement_pct,validation_selected
+nigeria,common_2010_2014,modwt_structural_gaussian,0,4,raw_garch,497,497,5.06374767288972e-08,-3.68145233781607,True
+nigeria,common_2010_2014,modwt_structural_gaussian,0,4,dwt_garch,497,497,5.06374767288972e-08,14.2479261217037,True
+nigeria,common_2010_2014,modwt_structural_student_t,0,4,raw_garch,497,497,4.95901068695558e-08,-1.53693734286975,False
+nigeria,common_2010_2014,modwt_structural_student_t,0,4,dwt_garch,497,497,4.95901068695558e-08,16.0215954148438,False
+south_africa,common_2010_2014,modwt_structural_gaussian,2,3,raw_garch,499,499,2.33058335329466e-08,-0.816637110791607,False
+south_africa,common_2010_2014,modwt_structural_gaussian,2,3,dwt_garch,499,499,2.33058335329466e-08,75.7702942053553,False
+south_africa,common_2010_2014,modwt_structural_student_t,2,3,raw_garch,499,499,2.33059441368424e-08,-0.817115562369497,False
+south_africa,common_2010_2014,modwt_structural_student_t,2,3,dwt_garch,499,499,2.33059441368424e-08,75.7701792169833,False
+tunisia,common_2010_2014,modwt_structural_gaussian,2,4,raw_garch,494,494,7.57515018591506e-09,2.27303086295999,False
+tunisia,common_2010_2014,modwt_structural_gaussian,2,4,dwt_garch,494,494,7.57515018591506e-09,40.6063982214536,False
+tunisia,common_2010_2014,modwt_structural_student_t,2,4,raw_garch,494,494,6.99582933642502e-09,9.74684582227601,True
+tunisia,common_2010_2014,modwt_structural_student_t,2,4,dwt_garch,494,494,6.99582933642502e-09,45.1486120379661,True

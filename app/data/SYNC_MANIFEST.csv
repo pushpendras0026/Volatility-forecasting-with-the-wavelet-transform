@@ -1,0 +1,156 @@
+file,bytes,source
+data/prices/manifest.csv,1604,<project>/submission/data/manifest.csv
+data/prices/issues.csv,595,<project>/submission/data/issues.csv
+data/prices/south_africa.csv,57312,<project>/submission/data/south_africa.csv
+data/prices/tunisia.csv,53969,<project>/submission/data/tunisia.csv
+data/prices/nigeria.csv,56848,<project>/submission/data/nigeria.csv
+data/prices/india_infosys.csv,156990,<project>/submission/data/india_infosys.csv
+data/prices/usa_ibm.csv,159840,<project>/submission/data/usa_ibm.csv
+data/prices/google_class_a.csv,155325,<project>/submission/data/google_class_a.csv
+data/results/tables/aic_candidate_grids.csv,540363,<project>/submission/results/f5f86cf4d1fb/tables/aic_candidate_grids.csv
+data/results/tables/all_model_later_comparison.csv,11404,<project>/submission/results/f5f86cf4d1fb/tables/all_model_later_comparison.csv
+data/results/tables/all_model_scores.csv,153985,<project>/submission/results/f5f86cf4d1fb/tables/all_model_scores.csv
+data/results/tables/annual_stock_effects.csv,60315,<project>/submission/results/f5f86cf4d1fb/tables/annual_stock_effects.csv
+data/results/tables/core_scores.csv,10479,<project>/submission/results/f5f86cf4d1fb/tables/core_scores.csv
+data/results/tables/coverage.csv,22827,<project>/submission/results/f5f86cf4d1fb/tables/coverage.csv
+data/results/tables/extension_comparisons.csv,18680,<project>/submission/results/f5f86cf4d1fb/tables/extension_comparisons.csv
+data/results/tables/frozen_selections.csv,2481,<project>/submission/results/f5f86cf4d1fb/tables/frozen_selections.csv
+data/results/tables/initial_diagnostics.csv,180694,<project>/submission/results/f5f86cf4d1fb/tables/initial_diagnostics.csv
+data/results/tables/later_period_trends.csv,2877,<project>/submission/results/f5f86cf4d1fb/tables/later_period_trends.csv
+data/results/tables/likelihood_order_effects.csv,11139,<project>/submission/results/f5f86cf4d1fb/tables/likelihood_order_effects.csv
+data/results/tables/mlp_test_seed_effects.csv,6019,<project>/submission/results/f5f86cf4d1fb/tables/mlp_test_seed_effects.csv
+data/results/tables/mlp_validation_effects.csv,18132,<project>/submission/results/f5f86cf4d1fb/tables/mlp_validation_effects.csv
+data/results/tables/parameter_effects.csv,42275,<project>/submission/results/f5f86cf4d1fb/tables/parameter_effects.csv
+data/results/tables/splits.csv,792,<project>/submission/results/f5f86cf4d1fb/tables/splits.csv
+data/results/tables/wavelet_effects.csv,57875,<project>/submission/results/f5f86cf4d1fb/tables/wavelet_effects.csv
+data/results/run/SUMMARY.md,3198,<project>/submission/results/f5f86cf4d1fb/SUMMARY.md
+data/results/run/frozen_parameter_choices.csv,1277,<project>/submission/results/f5f86cf4d1fb/frozen_parameter_choices.csv
+data/results/run/parameter_validation_scores.csv,9070,<project>/submission/results/f5f86cf4d1fb/parameter_validation_scores.csv
+data/results/run/later_all_metrics.csv,75658,<project>/submission/results/f5f86cf4d1fb/later_all_metrics.csv
+data/results/run/sensitivity_plan.csv,450,<project>/submission/results/f5f86cf4d1fb/sensitivity_plan.csv
+data/results/run/config.txt,792,<project>/submission/results/f5f86cf4d1fb/config.txt
+data/results/run/historical_status.csv,2477,<project>/submission/results/f5f86cf4d1fb/historical_status.csv
+data/results/run/later_status.csv,1760,<project>/submission/results/f5f86cf4d1fb/later_status.csv
+data/results/run/VERIFIED.txt,201,<project>/submission/results/f5f86cf4d1fb/VERIFIED.txt
+data/results/RUN_ID.txt,14,name of <project>/submission/results/f5f86cf4d1fb
+data/results/per_dataset/south_africa/metrics.csv,17268,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/metrics.csv
+data/results/per_dataset/south_africa/initial_orders.csv,3713,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/initial_orders.csv
+data/results/per_dataset/south_africa/ensemble_selection.csv,2113,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/ensemble_selection.csv
+data/results/per_dataset/south_africa/mlp_architecture_scores.csv,91,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/mlp_architecture_scores.csv
+data/results/per_dataset/south_africa/mlp_validation_scores.csv,707,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/mlp_validation_scores.csv
+data/results/per_dataset/south_africa/modwt_validation_selection.csv,315,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/modwt_validation_selection.csv
+data/results/per_dataset/south_africa/component_validation_selection.csv,1592,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/component_validation_selection.csv
+data/results/per_dataset/south_africa/split.csv,213,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/split.csv
+data/results/per_dataset/south_africa/frozen_registry.csv,3854,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/frozen_registry.csv
+data/forecasts/test_south_africa.csv.gz,510028,<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/test_forecasts.csv (slimmed columns)
+data/forecasts/validation_core_south_africa.csv.gz,114083,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/validation/forecasts.csv (core models, slimmed)"
+data/results/per_dataset/south_africa/core_refit_parameters.csv.gz,39965,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/south_africa/{validation,test}/diagnostics.csv (core models, selected columns)"
+data/results/per_dataset/tunisia/metrics.csv,17055,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/metrics.csv
+data/results/per_dataset/tunisia/initial_orders.csv,3713,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/initial_orders.csv
+data/results/per_dataset/tunisia/ensemble_selection.csv,2158,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/ensemble_selection.csv
+data/results/per_dataset/tunisia/mlp_architecture_scores.csv,74,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/mlp_architecture_scores.csv
+data/results/per_dataset/tunisia/mlp_validation_scores.csv,766,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/mlp_validation_scores.csv
+data/results/per_dataset/tunisia/modwt_validation_selection.csv,315,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/modwt_validation_selection.csv
+data/results/per_dataset/tunisia/component_validation_selection.csv,1640,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/component_validation_selection.csv
+data/results/per_dataset/tunisia/split.csv,213,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/split.csv
+data/results/per_dataset/tunisia/frozen_registry.csv,3851,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/frozen_registry.csv
+data/forecasts/test_tunisia.csv.gz,509696,<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/test_forecasts.csv (slimmed columns)
+data/forecasts/validation_core_tunisia.csv.gz,114578,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/validation/forecasts.csv (core models, slimmed)"
+data/results/per_dataset/tunisia/core_refit_parameters.csv.gz,39540,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/tunisia/{validation,test}/diagnostics.csv (core models, selected columns)"
+data/results/per_dataset/nigeria/metrics.csv,17033,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/metrics.csv
+data/results/per_dataset/nigeria/initial_orders.csv,3713,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/initial_orders.csv
+data/results/per_dataset/nigeria/ensemble_selection.csv,2110,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/ensemble_selection.csv
+data/results/per_dataset/nigeria/mlp_architecture_scores.csv,91,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/mlp_architecture_scores.csv
+data/results/per_dataset/nigeria/mlp_validation_scores.csv,772,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/mlp_validation_scores.csv
+data/results/per_dataset/nigeria/modwt_validation_selection.csv,314,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/modwt_validation_selection.csv
+data/results/per_dataset/nigeria/component_validation_selection.csv,1589,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/component_validation_selection.csv
+data/results/per_dataset/nigeria/split.csv,213,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/split.csv
+data/results/per_dataset/nigeria/frozen_registry.csv,3851,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/frozen_registry.csv
+data/forecasts/test_nigeria.csv.gz,536455,<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/test_forecasts.csv (slimmed columns)
+data/forecasts/validation_core_nigeria.csv.gz,133995,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/validation/forecasts.csv (core models, slimmed)"
+data/results/per_dataset/nigeria/core_refit_parameters.csv.gz,47779,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/nigeria/{validation,test}/diagnostics.csv (core models, selected columns)"
+data/results/per_dataset/india_infosys/metrics.csv,17331,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/metrics.csv
+data/results/per_dataset/india_infosys/initial_orders.csv,3713,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/initial_orders.csv
+data/results/per_dataset/india_infosys/ensemble_selection.csv,2110,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/ensemble_selection.csv
+data/results/per_dataset/india_infosys/mlp_architecture_scores.csv,74,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/mlp_architecture_scores.csv
+data/results/per_dataset/india_infosys/mlp_validation_scores.csv,767,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/mlp_validation_scores.csv
+data/results/per_dataset/india_infosys/modwt_validation_selection.csv,315,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/modwt_validation_selection.csv
+data/results/per_dataset/india_infosys/component_validation_selection.csv,1589,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/component_validation_selection.csv
+data/results/per_dataset/india_infosys/split.csv,216,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/split.csv
+data/results/per_dataset/india_infosys/frozen_registry.csv,3851,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/frozen_registry.csv
+data/forecasts/test_india_infosys.csv.gz,522082,<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/test_forecasts.csv (slimmed columns)
+data/forecasts/validation_core_india_infosys.csv.gz,131927,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/validation/forecasts.csv (core models, slimmed)"
+data/results/per_dataset/india_infosys/core_refit_parameters.csv.gz,47424,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/india_infosys/{validation,test}/diagnostics.csv (core models, selected columns)"
+data/results/per_dataset/india_infosys/later_metrics.csv,18557,<project>/submission/results/f5f86cf4d1fb/later/baseline/india_infosys/metrics.csv
+data/forecasts/later_india_infosys.csv.gz,2220804,<project>/submission/results/f5f86cf4d1fb/later/baseline/india_infosys/test_forecasts.csv (slimmed columns)
+data/results/per_dataset/usa_ibm/metrics.csv,17131,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/metrics.csv
+data/results/per_dataset/usa_ibm/initial_orders.csv,3713,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/initial_orders.csv
+data/results/per_dataset/usa_ibm/ensemble_selection.csv,2113,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/ensemble_selection.csv
+data/results/per_dataset/usa_ibm/mlp_architecture_scores.csv,108,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/mlp_architecture_scores.csv
+data/results/per_dataset/usa_ibm/mlp_validation_scores.csv,772,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/mlp_validation_scores.csv
+data/results/per_dataset/usa_ibm/modwt_validation_selection.csv,315,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/modwt_validation_selection.csv
+data/results/per_dataset/usa_ibm/component_validation_selection.csv,1592,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/component_validation_selection.csv
+data/results/per_dataset/usa_ibm/split.csv,216,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/split.csv
+data/results/per_dataset/usa_ibm/frozen_registry.csv,3851,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/frozen_registry.csv
+data/forecasts/test_usa_ibm.csv.gz,509109,<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/test_forecasts.csv (slimmed columns)
+data/forecasts/validation_core_usa_ibm.csv.gz,115444,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/validation/forecasts.csv (core models, slimmed)"
+data/results/per_dataset/usa_ibm/core_refit_parameters.csv.gz,40195,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/usa_ibm/{validation,test}/diagnostics.csv (core models, selected columns)"
+data/results/per_dataset/usa_ibm/later_metrics.csv,18292,<project>/submission/results/f5f86cf4d1fb/later/baseline/usa_ibm/metrics.csv
+data/forecasts/later_usa_ibm.csv.gz,2267955,<project>/submission/results/f5f86cf4d1fb/later/baseline/usa_ibm/test_forecasts.csv (slimmed columns)
+data/results/per_dataset/google_class_a/metrics.csv,17414,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/metrics.csv
+data/results/per_dataset/google_class_a/initial_orders.csv,3713,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/initial_orders.csv
+data/results/per_dataset/google_class_a/ensemble_selection.csv,2113,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/ensemble_selection.csv
+data/results/per_dataset/google_class_a/mlp_architecture_scores.csv,91,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/mlp_architecture_scores.csv
+data/results/per_dataset/google_class_a/mlp_validation_scores.csv,765,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/mlp_validation_scores.csv
+data/results/per_dataset/google_class_a/modwt_validation_selection.csv,314,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/modwt_validation_selection.csv
+data/results/per_dataset/google_class_a/component_validation_selection.csv,1592,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/component_validation_selection.csv
+data/results/per_dataset/google_class_a/split.csv,216,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/split.csv
+data/results/per_dataset/google_class_a/frozen_registry.csv,3851,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/frozen_registry.csv
+data/forecasts/test_google_class_a.csv.gz,535593,<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/test_forecasts.csv (slimmed columns)
+data/forecasts/validation_core_google_class_a.csv.gz,133766,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/validation/forecasts.csv (core models, slimmed)"
+data/results/per_dataset/google_class_a/core_refit_parameters.csv.gz,48619,"<project>/submission/results/f5f86cf4d1fb/historical/baseline/google_class_a/{validation,test}/diagnostics.csv (core models, selected columns)"
+data/results/per_dataset/google_class_a/later_metrics.csv,18596,<project>/submission/results/f5f86cf4d1fb/later/baseline/google_class_a/metrics.csv
+data/forecasts/later_google_class_a.csv.gz,2260570,<project>/submission/results/f5f86cf4d1fb/later/baseline/google_class_a/test_forecasts.csv (slimmed columns)
+data/distribution/innovation_distribution_comparison.csv,76035,<project>/submission/Distribution/results/1cec5bd53bb8/innovation_distribution_comparison.csv
+data/distribution/heldout_win_counts.csv,85,<project>/submission/Distribution/results/1cec5bd53bb8/heldout_win_counts.csv
+data/distribution/heldout_winners.csv,2480,<project>/submission/Distribution/results/1cec5bd53bb8/heldout_winners.csv
+data/distribution/fit_status_summary.csv,114,<project>/submission/Distribution/results/1cec5bd53bb8/fit_status_summary.csv
+data/distribution/baseline_reproduction.csv,9067,<project>/submission/Distribution/results/1cec5bd53bb8/baseline_reproduction.csv
+data/distribution/COMPARISON.md,19543,<project>/submission/Distribution/results/1cec5bd53bb8/COMPARISON.md
+data/distribution/job_failures.csv,4,<project>/submission/Distribution/results/1cec5bd53bb8/job_failures.csv
+data/distribution/forecasts/south_africa_raw_garch_test.csv.gz,65126,<project>/submission/Distribution/results/1cec5bd53bb8/south_africa/raw_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/south_africa_dwt_garch_test.csv.gz,64190,<project>/submission/Distribution/results/1cec5bd53bb8/south_africa/dwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/south_africa_modwt_garch_test.csv.gz,64806,<project>/submission/Distribution/results/1cec5bd53bb8/south_africa/modwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/tunisia_raw_garch_test.csv.gz,65121,<project>/submission/Distribution/results/1cec5bd53bb8/tunisia/raw_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/tunisia_dwt_garch_test.csv.gz,67218,<project>/submission/Distribution/results/1cec5bd53bb8/tunisia/dwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/tunisia_modwt_garch_test.csv.gz,64961,<project>/submission/Distribution/results/1cec5bd53bb8/tunisia/modwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/nigeria_raw_garch_test.csv.gz,65641,<project>/submission/Distribution/results/1cec5bd53bb8/nigeria/raw_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/nigeria_dwt_garch_test.csv.gz,65404,<project>/submission/Distribution/results/1cec5bd53bb8/nigeria/dwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/nigeria_modwt_garch_test.csv.gz,65645,<project>/submission/Distribution/results/1cec5bd53bb8/nigeria/modwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/india_infosys_raw_garch_test.csv.gz,64412,<project>/submission/Distribution/results/1cec5bd53bb8/india_infosys/raw_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/india_infosys_raw_garch_later.csv.gz,233507,<project>/submission/Distribution/results/1cec5bd53bb8/india_infosys/raw_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/india_infosys_dwt_garch_test.csv.gz,64130,<project>/submission/Distribution/results/1cec5bd53bb8/india_infosys/dwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/india_infosys_dwt_garch_later.csv.gz,235976,<project>/submission/Distribution/results/1cec5bd53bb8/india_infosys/dwt_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/india_infosys_modwt_garch_test.csv.gz,64428,<project>/submission/Distribution/results/1cec5bd53bb8/india_infosys/modwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/india_infosys_modwt_garch_later.csv.gz,233674,<project>/submission/Distribution/results/1cec5bd53bb8/india_infosys/modwt_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/usa_ibm_raw_garch_test.csv.gz,65793,<project>/submission/Distribution/results/1cec5bd53bb8/usa_ibm/raw_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/usa_ibm_raw_garch_later.csv.gz,239105,<project>/submission/Distribution/results/1cec5bd53bb8/usa_ibm/raw_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/usa_ibm_dwt_garch_test.csv.gz,65463,<project>/submission/Distribution/results/1cec5bd53bb8/usa_ibm/dwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/usa_ibm_dwt_garch_later.csv.gz,241303,<project>/submission/Distribution/results/1cec5bd53bb8/usa_ibm/dwt_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/usa_ibm_modwt_garch_test.csv.gz,66000,<project>/submission/Distribution/results/1cec5bd53bb8/usa_ibm/modwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/usa_ibm_modwt_garch_later.csv.gz,240261,<project>/submission/Distribution/results/1cec5bd53bb8/usa_ibm/modwt_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/google_class_a_raw_garch_test.csv.gz,65384,<project>/submission/Distribution/results/1cec5bd53bb8/google_class_a/raw_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/google_class_a_raw_garch_later.csv.gz,239839,<project>/submission/Distribution/results/1cec5bd53bb8/google_class_a/raw_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/google_class_a_dwt_garch_test.csv.gz,66643,<project>/submission/Distribution/results/1cec5bd53bb8/google_class_a/dwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/google_class_a_dwt_garch_later.csv.gz,241350,<project>/submission/Distribution/results/1cec5bd53bb8/google_class_a/dwt_garch/later/forecasts.csv (slimmed columns)
+data/distribution/forecasts/google_class_a_modwt_garch_test.csv.gz,65173,<project>/submission/Distribution/results/1cec5bd53bb8/google_class_a/modwt_garch/test/forecasts.csv (slimmed columns)
+data/distribution/forecasts/google_class_a_modwt_garch_later.csv.gz,238840,<project>/submission/Distribution/results/1cec5bd53bb8/google_class_a/modwt_garch/later/forecasts.csv (slimmed columns)
+data/distribution/fit_attempts_all.csv.gz,402993,<project>/submission/Distribution/results/1cec5bd53bb8/<dataset>/<pipeline>/fit_attempts.csv (row-bound)
+data/legacy/forecast_bias.csv,1475,<project>/final_latex_submission/generated/forecast_bias.csv
+data/legacy/structural_order_pairwise.csv,1534,<project>/final_latex_submission/generated/structural_order_pairwise.csv
+data/legacy/calibrated_metrics.csv,33674,<project>/final_latex_submission/generated/calibrated_metrics.csv
+data/legacy/core_comparison_metrics.csv,1826,<project>/final_latex_submission/generated/core_comparison_metrics.csv
+data/legacy/strategy_pairwise.csv,30745,<project>/final_latex_submission/generated/strategy_pairwise.csv
+data/legacy/source_run.txt,60,<project>/final_latex_submission/generated/source_run.txt
+data/legacy/run_config.txt,830,<project>/final_latex_submission/generated/run_config.txt
+data/derived/return_moments.csv,4003,computed by sync_data.descriptive_stats from data/prices

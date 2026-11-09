@@ -1,0 +1,12 @@
+list(version = "1.0.0", seed = 101L, mean_window = 20L, max_window = 1024L, 
+    min_train = 150L, max_pq = 3L, component_max_pq = 2L, criterion = "AIC", 
+    refit_every = 20L, validation_days = 60L, native_test_days = 252L, 
+    validation_stride = 1L, test_stride = 1L, filters = c("haar", 
+    "db4", "db6"), transforms = c("dwt", "modwt"), component_levels = 2L, 
+    mlp_hidden = c(3L, 5L), mlp_decay = c(0.001, 0.01), mlp_seeds = c(101L, 
+    202L, 303L), mlp_maxit = 300L, workers = 4, budget_minutes = 115, 
+    max_origins = Inf, profiles = c("paper_2000_2014", "common_2010_2014", 
+    "native"), target_id = "squared_deviation_trailing20_decimal", 
+    fit_method = "two_step_ARMA_ML_then_stationary_Gaussian_GARCH11", 
+    rebuild = FALSE, deadline = structure(1793820242.77462, class = c("POSIXct", 
+    "POSIXt")))

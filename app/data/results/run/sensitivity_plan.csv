@@ -1,0 +1,7 @@
+"scenario","max_window","refit_every","criterion","max_pq","scope"
+"window768",768,20,"AIC",3,"raw_garch,dwt_garch,modwt_garch"
+"window1536",1536,20,"AIC",3,"raw_garch,dwt_garch,modwt_garch"
+"cadence40",1024,40,"AIC",3,"raw_garch,dwt_garch,modwt_garch"
+"cadence60",1024,60,"AIC",3,"raw_garch,dwt_garch,modwt_garch"
+"criterionBIC",1024,20,"BIC",3,"raw_garch,dwt_garch,modwt_garch"
+"order_cap5",1024,20,"AIC",5,"raw_garch,dwt_garch,modwt_garch"

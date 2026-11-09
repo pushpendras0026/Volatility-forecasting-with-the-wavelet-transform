@@ -1,0 +1,5 @@
+"model_id","coverage","eligible","MSE","n_common","selected"
+"modwt_garch",1,TRUE,1.02965496312681e-07,504,TRUE
+"modwt_garch_student_t",1,TRUE,1.03164124323654e-07,504,FALSE
+"modwt_garch_structural",1,TRUE,1.02965496312681e-07,504,FALSE
+"modwt_garch_structural_student_t",1,TRUE,1.03164124323654e-07,504,FALSE

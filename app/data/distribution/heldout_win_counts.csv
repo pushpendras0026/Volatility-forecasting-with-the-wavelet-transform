@@ -1,0 +1,4 @@
+"distribution","MSE_wins","MAE_wins"
+"gaussian",2,4
+"student_t",12,5
+"ged",13,18

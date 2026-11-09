@@ -1,0 +1,5 @@
+country,sample_size,mean_pct,sd_pct,skewness,kurtosis,ljung_box_Q24,jarque_bera
+Kenya,3913,2.0e-4,0.014,-0.22,686.20,141.79,76081473
+Nigeria,3904,3.2e-4,0.014,-0.76,272.37,76.16,11800377
+South Africa,3913,2.8e-4,0.018,-0.23,8.61,60.50,5161.31
+Tunisia,3913,2.7e-4,0.007,-0.04,8.42,136.95,4804.42

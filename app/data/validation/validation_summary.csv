@@ -1,0 +1,8 @@
+case,dataset,transform,distribution,arma,first_date,last_date,n,refits,max_abs_actual_diff,median_abs_rel_diff_pct,max_abs_rel_diff_pct,corr,MSE_R,MSE_py,MSE_diff_pct,max_abs_alpha_diff,max_abs_beta_diff,py_failures,seconds
+south_africa/raw_garch,south_africa,raw,gaussian,"(3,1)",2012-01-03,2012-06-25,120,6,4.96537e-16,0.00195816,0.00901711,1,9.45428e-09,9.45429e-09,0.000206348,2.21831e-05,2.97739e-05,0,4.42979
+south_africa/modwt_garch,south_africa,modwt,gaussian,"(3,2)",2012-01-03,2012-06-25,120,6,4.96537e-16,2.325,14.6446,0.984541,9.4186e-09,9.37738e-09,-0.437696,0.00419192,0.00479355,0,14.0888
+south_africa/dwt_garch,south_africa,dwt,gaussian,"(2,2)",2012-01-03,2012-06-25,120,6,4.96537e-16,0.0550969,83.8887,0.945422,5.34769e-08,5.72064e-08,6.97388,0.0092342,0.0107431,0,4.50625
+south_africa/raw_garch_student_t,south_africa,raw,student_t,"(3,1)",2012-01-03,2012-06-25,120,6,4.96537e-16,0.00337648,0.0109056,1,9.43302e-09,9.43307e-09,0.000523191,1.96666e-05,3.31734e-05,0,2.65785
+south_africa/raw_garch__ged,south_africa,raw,ged,"(3,1)",2012-01-03,2012-06-25,120,6,4.96537e-16,0.00190648,0.00897415,1,9.44436e-09,9.44438e-09,0.000206022,2.22327e-05,2.95935e-05,0,2.61266
+nigeria/raw_garch,nigeria,raw,gaussian,"(0,3)",2012-01-12,2012-07-04,120,6,4.88975e-16,0.00909345,0.131156,1,1.25047e-08,1.25021e-08,-0.0206568,0.000415122,0.000259031,0,2.93708
+nigeria/modwt_garch,nigeria,modwt,gaussian,"(3,1)",2012-01-12,2012-07-04,120,6,4.88975e-16,0.242531,0.704428,0.999998,1.23877e-08,1.23981e-08,0.0846464,0.000665102,0.00064451,0,9.89459

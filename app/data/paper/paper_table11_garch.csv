@@ -1,0 +1,5 @@
+country,garch_alpha1,garch_beta1,garch_alpha1_plus_beta1,modwt_alpha1,modwt_beta1,modwt_alpha1_plus_beta1,garch_aic,modwt_garch_aic
+Kenya,0.15,0.81,0.96,0.25,0.49,0.74,-6.93,-7.15
+Nigeria,0.33,0.72,1.05,0.51,0.62,1.13,-6.25,-6.38
+South Africa,0.07,0.91,0.98,0.10,0.86,0.96,-5.48,-5.47
+Tunisia,0.09,0.85,0.94,0.05,0.94,0.99,-7.24,-7.34

@@ -1,0 +1,11 @@
+list(seed = 101L, workers = 16L, mean_window = 20L, max_window = 1024L, 
+    refit_every = 20L, max_pq = 3L, component_max_pq = 2L, criterion = "AIC", 
+    max_origins = Inf, selection_min_coverage = 0.95, validation_stride = 1L, 
+    test_stride = 1L, checkpoint_every = 100L, mlp_hidden = c(3L, 
+    5L), mlp_decay = c(0.001, 0.01), mlp_seeds = c(101L, 202L, 
+    303L), mlp_maxit = 300L, filters = c("haar", "db4", "db6"
+    ), levels = 1:2, target_id = "squared_deviation_trailing20_decimal", 
+    training = c("2004-01-01", "2009-12-31"), validation = c("2010-01-01", 
+    "2011-12-31"), test = c("2012-01-01", "2014-12-31"), later = c("2015-01-01", 
+    "2025-12-31"), dataset_ids = c("south_africa", "tunisia", 
+    "nigeria", "india_infosys", "usa_ibm", "google_class_a"))
