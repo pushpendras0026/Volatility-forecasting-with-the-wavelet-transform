@@ -166,21 +166,21 @@ The main score is the MSE (and RMSE) of $\hat y$ against $y$ on the test days. W
 \section{Our Extensions}
 \label{sec:ext}
 
-The paper only uses Gaussian GARCH on African indices. We added the following. All their settings were chosen on the 2010--2011 validation period and frozen before the test.
+The paper only assumes Gaussian distribution on GARCH on African indices. We added the following extensions. The paper chose 2010-2011 validation period and settings were kept the same for test set.
 
-\textbf{E1: fat-tailed innovations.} Our tests (Table~\ref{tab:data}) show that all six series reject normality strongly, so a Gaussian $z_t$ in Eq.~(\ref{eq:garch}) is not realistic. We refit each of the three core pipelines with a standardized Student-t (shape $\nu$) and with a GED (shape $\kappa$), keeping the same ARMA mean, window and refit plan. Both likelihoods were written by us and fitted with \texttt{optim}.
+\textbf{E1: Student-t distribution and GED.} Our tests (Table~\ref{tab:data}) show that all six datasets reject normality test, so using a Gaussian $z_t$ in Eq.~(\ref{eq:garch}) is not accurate. We again fit each of the three pipelines using a standardized Student-t (shape $\nu$) distribution and with a GED (shape $\kappa$), keeping the same ARMA mean, window and procedure. We calculated likelihoods for both process using \texttt{optim}.
 
-\textbf{E2: structural MODWT order.} Multiplying a raw ARMA($p,q$) by the Haar filter $(1-B)/2$ adds one MA lag, so the MODWT detail should roughly follow ARMA($p,q+1$). We tried this rule (with Gaussian and Student-t) as an alternative to choosing the MODWT order by AIC. The validation period picks between them per series.
+\textbf{E2: structural MODWT order.} Multiplying a raw ARMA($p,q$) by the Haar filter $(1-B)/2$ adds one MA lag, so the MODWT detail should follow ARMA($p,q+1$). We tried this rule (with Gaussian and Student-t) as an alternative to choosing the MODWT order by AIC. The validation period picks between them per series.
 
-\textbf{E3: wavelet component models of the target.} Instead of transforming returns, we also decompose the target $y$ itself into $A_J$ and $D_J,\dots,D_1$ (DWT or MODWT, Haar, db4 or db6, $J=1$ or 2), forecast each part and sum them. Either all parts get an ARMA (``all-ARMA''), or the approximation gets ARMA and the details get AR(1) with GARCH (``mixed''). That gives 24 variants. Validation picks one per series. The supplementary material shows an example of such a split.
+\textbf{E3: wavelet component models of the target.} Instead of transforming returns, we also decompose the target $y$ itself into $A_J$ and $D_J,\dots,D_1$ , forecast each part and sum them.The approximation is put into ARMA and the detail part is put into GARCH.
 
-\textbf{E4: equal-weight ensembles.} Forecast averaging often helps \cite{bates1969}. We built three ensembles, without fitting any weights on the test: \emph{base} (the six raw/DWT/MODWT ARMA and GARCH forecasts), \emph{combined} (base plus the direct-target ARMA and four selected component models) and \emph{MODWT} (two MODWT return models plus two MODWT component models).
+\textbf{E4: Ensemble learning.}  We built three ensembles, without fitting any weights on the test: \emph{base} (the six raw/DWT/MODWT ARMA and GARCH forecasts), \emph{combined} (base plus the direct-target ARMA and four selected component models) and \emph{MODWT} (two MODWT return models and two MODWT component models).
 
-\textbf{E5: neural network.} A one-hidden-layer MLP \cite{venables2002} with 7 inputs (the last five targets plus the past 5-day and 20-day mean), 3 or 5 sigmoid units, weight decay 0.001 or 0.01, and a linear output. Inputs are scaled using training data only. Size and decay are picked by mean validation MSE over three seeds (101, 202, 303), and we report all three seeds on the test.
+\textbf{E5: Neural network.} We also implement a hidden-layer MLP  with 7 inputs (the last five targets and the past 5-day and 20-day mean), 3 or 5 sigmoid units, weight decay 0.001 or 0.01, and a linear output.We test over three seeds (101, 202, 303) and use validation MSE to determine size and decay, and we report all three seeds on the test.
 
-\textbf{E6: sensitivity study.} For the three core GARCH pipelines we change one setting at a time: window 768 or 1,536 (instead of 1,024), refit every 40 or 60 days (instead of 20), BIC instead of AIC, and order cap 5 instead of 3.
+\textbf{E6: Change in settings.} For the three  pipelines we change one setting at a time: window 768 or 1,536 (instead of 1,024), refit every 40 or 60 days (instead of 20), use BIC instead of AIC.
 
-\textbf{E7: more markets and a later period.} Besides three of the paper's African indices we add Infosys (India), IBM and Google (USA), and for the stocks we also run the frozen models on 2015--2025.
+\textbf{E7: More markets and a later period.} Besides three of the paper's African indices we add Infosys (India), IBM and Google (USA), and for the stocks we also run the models on 2015--2025.
 
 %=====================================================================
 \section{Experiments}
@@ -188,9 +188,9 @@ The paper only uses Gaussian GARCH on African indices. We added the following. A
 
 \subsection{Data and setup}
 
-Daily closing prices come from public data providers: FTSE/JSE All Share (South Africa), TUNINDEX (Tunisia) and the NGX All Share Index (Nigeria), and Yahoo Finance adjusted closes for Infosys, IBM and Google class A (Google starts at its August 2004 listing). We keep all trading dates and do no interpolation or filling. Known data problems are logged, for example Tunisia has two returns of $-0.27$ and $+0.27$ on 15--16 Sep 2004, which we keep. Training is 2004--2009 (about 1,350--1,510 returns), validation 2010--2011 (about 500) and test 2012--2014 (about 750). The stocks have about 2,700 more days in 2015--2025.
+The daily closing prices were obtained from the following public data sources : FTSE/JSE All Share (South Africa), TUNINDEX (Tunisia) and the NGX All Share Index (Nigeria), and Yahoo Finance adjusted closes for Infosys, IBM and Google. We kept all trading dates and did not interpolate or fill the data. We kept a record of the inconsistencies in the data, for example Tunisia has two returns of $-0.27$ and $+0.27$ on 15--16 Sep 2004. Training was done on data from 2004 to 2009 (about 1,350--1,510 returns), validation on 2010--2011 (about 500 returns) and test 2012--2014 (about 750 returns). The stocks have about 2,700 more days in 2015--2025.
 
-Everything is written in base R 4.6.2. Only \texttt{nnet} is used for the MLP; wavelets, GARCH, GED/Student-t likelihoods, the statistical tests and the metrics are our own code. Our statistical tests were checked against independent Python reference values. Jobs run in parallel on 16 cores, and the forecasts are bit-identical whatever the number of workers. The full code and a one-command reproduction script are at \url{https://github.com/pushpendras0026/Volatility-forecasting-with-the-wavelet-transform}.
+The code is written in R and \texttt{nnet} is used for MLP. Jobs run in parallel on 16 cores. The code and supplementary materials are available on \href{https://github.com/pushpendras0026/Volatility-forecasting-with-the-wavelet-transform}{Github}.
 
 \begin{table}[t]
 \caption{Full-sample daily log returns (2004 to 2014 for indices, to 2025 for stocks). Kurt is raw kurtosis (normal $=3$). JB: Jarque--Bera $p$. ADF and KPSS are statistics; all ADF $p<10^{-4}$.}
@@ -211,7 +211,7 @@ Google & 5376 & 0.32 & 10.67 & $<10^{-4}$ & $-28.4$ & 0.108 \\
 \end{tabular}
 \end{table}
 
-\textbf{Data checks.} Following \citet{ismail2016} and \citet{rubio2023} we first tested the returns (Table~\ref{tab:data}). Every series has kurtosis above 3 and the Jarque--Bera test \cite{jarque1987} rejects normality with $p<10^{-4}$. Tunisia's kurtosis of 522 is mostly from the two September 2004 days. The ADF test \cite{dickey1979} rejects a unit root for all series and KPSS \cite{kpss1992} does not reject stationarity at 5\% (Tunisia is borderline with 0.463), so returns can be modelled without differencing. After fitting, the ARCH-LM test on the plain ARMA residuals was hugely significant (for example $p\approx10^{-45}$ for South Africa) while on the standardized GARCH residuals it mostly was not, so GARCH does capture the clustering.
+\textbf{Data checks.} Following \citet{ismail2016} and \citet{rubio2023} we first tested the returns (Table~\ref{tab:data}). Every series has kurtosis above 3 and the Jarque--Bera test rejects normality with $p<10^{-4}$. Tunisia's kurtosis of 522 is mostly from the two September 2004 days. The ADF test rejects a unit root for all series and KPSS does not reject stationarity at 5\% (Tunisia is borderline with 0.463), so returns can be modelled without differencing. After fitting, the ARCH-LM test on the plain ARMA residuals was very significant ($p\approx10^{-45}$ for South Africa) while on the standardized GARCH residuals it was not significant, so GARCH effectively captures the clustering.
 
 \subsection{Core result: raw vs.\ DWT vs.\ MODWT}
 
@@ -235,9 +235,9 @@ Google & 752 & 7.7822 & 7.7857 & \textbf{7.7781} & $-0.1$ & $+0.1$\\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:core} is the main comparison. The differences are small. MODWT-GARCH is within about 3\% MSE of raw GARCH on every series; it is a little better on four and a little worse on Nigeria. This makes sense: with Haar, the MODWT detail is a fixed linear filter of the returns, and an ARMA on a filtered series can only re-express what an ARMA on the returns can already do. The paired DWT does better: it is the best model on Tunisia, Nigeria and Infosys, with 7.9\%, 9.3\% and 3.0\% lower MSE, and close to raw on the other three. The block-bootstrap intervals of the gain are above zero for Nigeria ($0.5$ to $17.6\%$) and Infosys ($1.4$ to $14.9\%$) but very wide for Tunisia ($-20.7$ to $14.9\%$), so the Tunisia gain is not reliable. A likely reason is that the DWT models two coefficient series with their own GARCH, so on the less liquid African markets it can react to short shocks differently. Still, on IBM and Google, the two most liquid stocks, nothing beats raw GARCH.
+Table~\ref{tab:core} shows that differences in RMSE are very small. MODWT-GARCH is within about 3\% MSE of raw GARCH on every series; it is better on four datasets and worse on Nigeria. Hence, with Haar, the MODWT detail part is a fixed linear filter of the returns, and an ARMA on a filtered series can give same results as what an ARMA on the returns can already do. The paired DWT performs better: it is the best model on Tunisia, Nigeria and Infosys, with 7.9\%, 9.3\% and 3.0\% lower MSE, and close to baseline on the other three stocks. The gain intervals are positive for Nigeria ($0.5$ to $17.6\%$) and Infosys ($1.4$ to $14.9\%$) but very wide for Tunisia ($-20.7$ to $14.9\%$), so the Tunisia gain is not reliable. A possible reason is that the DWT models two coefficient series with their own GARCH, so on the less volatile African markets it can react to short shocks differently. However, on IBM and Google, with high volatility,raw GARCH performs the best
 
-For reference, the simple baselines tell a mixed story (each on its own available dates). The naive forecast ($\hat y_{t+1}=y_t$) is worse than raw GARCH on all six series, for example RMSE 1.951 vs.\ 1.343 on South Africa. A plain ARMA with constant variance is worse on four series (1.705 on South Africa) but slightly better on Tunisia and Infosys, and the 20-day trailing mean of $y$ even beats GARCH on Tunisia (0.663 vs.\ 0.708). The Tunisia test target is very small and spiky, so a smooth average does well there. Overall the GARCH part does most of the work, and the wavelet step adds a small amount on top at best.Figure~\ref{fig:tun} shows that the forecasts follow the big spikes of the target only after they happen, which is what we expect from any one-step GARCH-type model.
+The baseline models used for reference give mixed results(each on its own available dates). It ($\hat y_{t+1}=y_t$) is worse than raw GARCH on all six series, for example RMSE 1.951 vs.\ 1.343 on South Africa. A plain ARMA with constant variance is worse on four series (1.705 on South Africa) but slightly better on Tunisia and Infosys, and the 20-day trailing mean of $y$ even beats GARCH on Tunisia (0.663 vs.\ 0.708). The Tunisia test target is very small and rapidly fluctuating, so a smooth average does well there. Overall the GARCH part does most of the work, and the wavelet step improves it by a small amount at best.Figure~\ref{fig:tun} shows that the forecasts follow the big spikes of the target only after they happen, which is what we expect from any one-step GARCH-type model.
 
 \begin{figure*}[t]
 \centering
@@ -249,7 +249,7 @@ For reference, the simple baselines tell a mixed story (each on its own availabl
 \subsection{Fat-tailed innovations (E1)}
 
 \begin{table}[t]
-\caption{Raw GARCH test RMSE $\times10^4$ (2012--2014) under three innovation distributions, on dates where all three have a forecast. Last row: number of the 27 held-out groups (series $\times$ pipeline $\times$ period, incl.\ 2015--2025) where each has the lowest MSE.}
+\caption{Raw GARCH test RMSE $\times10^4$ (2012--2014) under three innovation distributions. Last row indicates the number of the 27 held-out groups (series $\times$ pipeline $\times$ period, incl.\ 2015--2025) where each distribution has the lowest MSE.}
 \label{tab:dist}
 \centering\small
 \begin{tabular}{lrrr}
@@ -268,7 +268,7 @@ Lowest MSE & 4 & 13 & 10\\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:dist} shows that a fat-tailed distribution helps a little almost everywhere. Over the 27 held-out groups (6 series $\times$ 3 pipelines in 2012--2014 plus 3 stocks $\times$ 3 pipelines in 2015--2025), Student-t has the lowest MSE in 13 and GED in 10, while Gaussian wins only 4. On MAE GED is best in 18 groups. The gains are small, the median MSE change of Student-t vs.\ Gaussian is about $-0.3\%$ in 2012--2014 and $-1.2\%$ in 2015--2025, but they mostly go in the right direction. The biggest gain is on Tunisia, which has by far the fattest tails: DWT-GARCH goes from 0.6790 to 0.6564 with Student-t (6.6\% lower MSE). This matches the reason we tried it. With fat tails, a Gaussian likelihood over-reacts to one huge return, and the t or GED likelihood down-weights it, giving more stable $\alpha$ and $\beta$.
+Table~\ref{tab:dist} shows that a fat-tailed distribution improves the results in all of our datasets. Over the 27 held-out groups (6 series $\times$ 3 pipelines in 2012--2014 and 3 stocks $\times$ 3 pipelines in 2015--2025), Student-t has the lowest MSE in 13 and GED in 10, while Gaussian has the lowest in 4 cases. On MAE GED is best in 18 groups. The gains are small, the median MSE change of Student-t vs.\ Gaussian is about $-0.3\%$ in 2012--2014 and $-1.2\%$ in 2015--2025, but they mostly go in the right direction. The biggest gain is on Tunisia, which has the fattest tails: DWT-GARCH goes from 0.6790 to 0.6564 with Student-t (6.6\% lower MSE). The reason is that with fat tails, a Gaussian likelihood over-reacts to one huge return, and the t or GED likelihood down-weights it, giving more stable $\alpha$ and $\beta$.
 
 \subsection{Component models, ensembles and MLP (E3--E5)}
 
@@ -279,15 +279,15 @@ Table~\ref{tab:dist} shows that a fat-tailed distribution helps a little almost 
 \label{fig:gain}
 \end{figure}
 
-Figure~\ref{fig:gain} gives the gains of the extensions on the test. The validation-selected MODWT model (Gaussian, structural or Student-t, as chosen per series) gains between $-2.9\%$ and $+1.9\%$, so the E2 order rule did not change much. The selected component model is good on Nigeria ($+2.2\%$) and Infosys ($+2.6\%$) but bad on Tunisia ($-22.7\%$), where the one huge spike in early 2013 hurts a model that works on the target directly. Most of the 24 component variants were much worse than raw GARCH: out of 144 series--variant pairs only 9 beat it and 123 were more than 10\% worse. For example on South Africa the db4 and db6 all-ARMA versions had more than 100\% higher MSE. Smoothing the target with a two-sided filter and then forecasting at the edge does not seem to work well.
+Figure~\ref{fig:gain} gives the gains of the extensions on the test. The validation-selected MODWT model (Gaussian, structural or Student-t, as chosen per series) gains between $-2.9\%$ and $+1.9\%$, so the E2 order rule did not change much. The selected component model is good on Nigeria ($+2.2\%$) and Infosys ($+2.6\%$) but bad on Tunisia ($-22.7\%$), where the one huge spike in early 2013 hurts a model that works on the target directly. Most of the 24 component variants were much worse than raw GARCH: out of 144 series--variant pairs only 9 beat it and 123 were more than 10\% worse. For example on South Africa the db4 and db6 all-ARMA versions had more than 100\% higher MSE. Smoothing the target with a two-sided filter and then forecasting at the edge does not work well.
 
-The ensembles are mixed. The base ensemble gains 10.0\% on Tunisia and 4.1\% on Infosys but loses 17.4\% on South Africa. The combined ensemble gains on Tunisia, Nigeria and Infosys. The MODWT ensemble is worse on five of six series (about $-11\%$ on the three stocks) because it contains component models that are weak. Equal weights can not protect against a bad member.
+The ensembles give mixed results. The base ensemble gains 10.0\% on Tunisia and 4.1\% on Infosys but loses 17.4\% on South Africa. The combined ensemble gains on Tunisia, Nigeria and Infosys. The MODWT ensemble is worse on five of six series (about $-11\%$ on the three stocks) because it contains component models that are weak.
 
 The MLP is the weakest model. With seed 101 it is worse than raw GARCH on every series, from $-4.4\%$ on IBM to $-812\%$ on Infosys, where one bad seed gave a few huge forecasts. The three seeds also disagree a lot: on Infosys the RMSE is 33.27, 24.09 and 33.27 for seeds 101, 202 and 303, against 23.17 for raw GARCH on the same 199 dates. With only about 1,000 noisy training points and 7 inputs, the network can not learn anything that GARCH does not already capture, and it is unstable.
 
 \subsection{Sensitivity (E6)}
 
-Changing the cadence (40 or 60 days), using BIC, or raising the order cap to 5 moved the test MSE of the core pipelines by less than about 2.6\% in all cases. The window length mattered more. A longer window of 1,536 lowered the MSE of raw GARCH by 7.9\% on Tunisia and 7.2\% on Nigeria, while a shorter window of 768 increased it by 14.4\% on Tunisia. For the stocks the window effect was below 2\%. So for these markets, more history gives more stable GARCH parameters, and the choice of window is more important than the choice of wavelet.
+Changing the window(40 or 60 days), using BIC, or raising the order cap to 5 moved the test MSE of the core pipelines by less than about 2.6\% in all cases. The window length changed the results a lot. A longer window of 1,536 lowered the MSE of raw GARCH by 7.9\% on Tunisia and 7.2\% on Nigeria, while a shorter window of 768 increased it by 14.4\% on Tunisia. For the stocks the window effect was below 2\%. So for these markets, more history gives more stable GARCH parameters, and the choice of window is more important than the choice of wavelet.
 
 \subsection{Later stock period, 2015--2025 (E7)}
 
@@ -311,27 +311,31 @@ MLP & $-812$ & $-52.5$ & $-4.4$ & $-51.1$ & $-5.5$ & $-71.2$\\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:later} runs the same frozen models on eleven more years of stock data. The picture is the same. MODWT stays within 0.3\% of raw GARCH. DWT keeps its gain on Infosys (2.6\%), turns slightly positive on IBM, and is worse on Google. The MODWT ensemble and the MLP stay clearly worse. Small gains can flip sign between periods (for example the ensembles on Google), so we should not read too much into a gain of 1--2\%. We have to be honest that we had looked at the 2015--2025 period in earlier exploratory work, so this is an extra check and not a fully untouched hold-out.
+Table~\ref{tab:later} runs the same models on eleven more years of stock data. The results are the same. MODWT stays within 0.3\% of raw GARCH. DWT keeps its gain on Infosys (2.6\%), turns slightly positive on IBM, and is worse on Google. The MODWT ensemble and the MLP perform clearly worse. Small gains can flip sign between periods (for example the ensembles on Google).
 
 %=====================================================================
 \section{Conclusion}
 \label{sec:conc}
 
-We rebuilt the wavelet + ARMA--GARCH approach of \citet{ismail2016} from scratch and tested it in a strict rolling setup on six markets. What we learned:
+We rebuilt the wavelet + ARMA--GARCH approach of \citet{ismail2016} from scratch and tested it  on six markets. Our observations are the following:
 \begin{itemize}
-\item The wavelet step is not a general improvement. MODWT-GARCH is almost the same as plain GARCH everywhere. Paired DWT-GARCH helps on Nigeria and Infosys, and maybe Tunisia (3--9\% lower MSE), but not on IBM, Google or South Africa. So we could not confirm the paper's result that the wavelet model is better on every market.
+\item The wavelet step does not improve predictions a lot. MODWT-GARCH performs almost the same as plain GARCH everywhere. DWT-GARCH helps on Nigeria and Infosys, and Tunisia (3--9\% lower MSE), but not on IBM, Google or South Africa. So we could not confirm the paper's result that the wavelet model is better on every market.
 \item How the wavelet forecast is mapped back to the return variance matters a lot. For the paired DWT, conditioning on the already-observed first return of the pair is necessary; without it the variance forecast is far too high.
-\item All returns are clearly non-normal, and Student-t or GED innovations give small but consistent gains, the most on the fattest-tailed series (Tunisia).
-\item A plain GARCH(1,1) is very hard to beat, which agrees with \citet{hansen2005}. Ensembles help only when all members are decent, and a small MLP is worse and unstable.
+\item Returns do not follow a normal distribution, and Student-t or GED additions give small but consistent gains, the most improvement is seen on the fattest-tailed series (Tunisia).
+\item A plain GARCH(1,1) is very hard to beat. Ensembles help only when all members perform better, and a small MLP performs worse and is unstable.
 \item The rolling window length had a bigger effect than the wavelet choice on some markets.
 \end{itemize}
 
-\textbf{Limitations.} Our differences are small and we did not run formal forecast comparison tests such as Diebold--Mariano or the model confidence set, so we do not claim that one model is significantly better. The squared-deviation target is a noisy proxy for true volatility. We used only Haar wavelets for the core pipelines and first-level transforms. The 2015--2025 stock period is retrospective.
+\textbf{Limitations.} The difference in errors of all methods is very small. The obtained target is a noisy proxy for true volatility. We used only Haar wavelets for the core pipelines and first-level transforms. The 2015--2025 stock period is retrospective.
 
-\textbf{Future work.} Natural next steps are: realized volatility from intraday data as a better target; formal tests (Diebold--Mariano, model confidence set); asymmetric models like EGARCH or GJR-GARCH, since bad news raises volatility more than good news; deeper wavelet levels and other filters inside the return pipelines; and forecast combinations with weights learned on validation instead of equal weights.
 
-\section*{Acknowledgements}
-We thank the course instructor and teaching assistants of DA-3041 for their guidance during the project.
+\section{Future Work}
+Our next steps are:
+\begin{itemize}
+\item\textbf{Formal tests:} Model Confidence Set,Diebold-Mariano
+\item \textbf{Using Asymmetric Models:} Frameworks like EGARCH or GJR-GARCH can be used to account for the leverage effect, where bad news increases volatility more than good news.
+\item\textbf{Deeper Window:}We can experiment with deeper wavelet levels and other filters inside the return pipelines and weights can be learned on validation instead of equal weights.
+\end{itemize}
 
 \bibliography{refs}
 \bibliographystyle{icml2018}
