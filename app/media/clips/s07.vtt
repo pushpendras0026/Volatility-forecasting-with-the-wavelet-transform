@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:01.587
+Now the wavelet idea.
+
+00:00:02.037 --> 00:00:04.476
+The simplest wavelet is the Haar filter.
+
+00:00:04.926 --> 00:00:06.343
+It compares neighbours.
+
+00:00:06.793 --> 00:00:10.807
+Take two returns, subtract one from the other, and scale.
+
+00:00:11.257 --> 00:00:13.663
+Big value: a sudden change.
+
+00:00:14.113 --> 00:00:15.859
+Small value: smooth.
+
+00:00:16.309 --> 00:00:21.586
+The discrete wavelet transform, or DWT, applies this to non-overlapping pairs.
+
+00:00:22.036 --> 00:00:24.987
+One and two, three and four, and so on.
+
+00:00:25.437 --> 00:00:27.482
+Eight returns give four coefficients.
+
+00:00:27.932 --> 00:00:29.758
+That halving is called decimation.
+
+00:00:30.208 --> 00:00:32.214
+Now shift the data by one day.
+
+00:00:32.664 --> 00:00:37.243
+The pairs are now different pairs, and every DWT coefficient changes.
+
+00:00:37.693 --> 00:00:40.217
+The result depends on where you happen to start.
+
+00:00:40.667 --> 00:00:46.746
+The maximal overlap transform, MODWT, uses every adjacent pair instead.
+
+00:00:47.196 --> 00:00:49.975
+One coefficient per day, no decimation.
+
+00:00:50.425 --> 00:00:53.560
+Shift the data, and the coefficients simply shift with it.
+
+00:00:54.010 --> 00:00:55.881
+This is called shift invariance.
+
+00:00:56.331 --> 00:01:00.637
+For forecasting, where a new day arrives every day, that property matters.

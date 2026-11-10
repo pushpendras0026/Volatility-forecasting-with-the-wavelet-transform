@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:02.974
+Our first extension goes back to the fat tails.
+
+00:00:03.424 --> 00:00:05.962
+The standard GARCH assumes normal shocks.
+
+00:00:06.412 --> 00:00:08.757
+What if we let the shocks have heavier tails?
+
+00:00:09.207 --> 00:00:13.071
+The Student t distribution has a degrees of freedom parameter, nu.
+
+00:00:13.521 --> 00:00:16.160
+Small nu puts much more weight in the tails.
+
+00:00:16.610 --> 00:00:19.366
+As nu grows, the curve becomes the normal.
+
+00:00:19.816 --> 00:00:24.914
+The generalized error distribution, or GED, has a shape parameter instead.
+
+00:00:25.364 --> 00:00:27.270
+Shape two is exactly normal.
+
+00:00:27.720 --> 00:00:30.476
+Below two the peak sharpens and the tails get heavier.
+
+00:00:30.926 --> 00:00:33.125
+Shape one is the Laplace distribution.
+
+00:00:33.575 --> 00:00:41.572
+When we let the data choose, the fitted nu values have a median of about 5, and the GED shapes a median of about 1.3.
+
+00:00:42.022 --> 00:00:44.998
+The data clearly prefer heavier tails than the normal.

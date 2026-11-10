@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:02.280
+Here are the results on the test years.
+
+00:00:02.730 --> 00:00:07.938
+Each bar is a model's RMSE divided by raw GARCH's RMSE on the same days.
+
+00:00:08.388 --> 00:00:09.594
+One means a tie.
+
+00:00:10.044 --> 00:00:11.228
+Below one is better.
+
+00:00:11.678 --> 00:00:13.279
+First, DWT.
+
+00:00:13.729 --> 00:00:19.510
+Its error ranges from about 5 percent lower for Nigeria to about 1 percent higher for IBM.
+
+00:00:19.960 --> 00:00:21.780
+Here decimation does not hurt.
+
+00:00:22.230 --> 00:00:24.121
+Now MODWT.
+
+00:00:24.571 --> 00:00:27.180
+Its bars sit almost exactly on the line.
+
+00:00:27.630 --> 00:00:28.320
+Zoom in.
+
+00:00:28.770 --> 00:00:37.146
+MODWT is slightly better on South Africa, Tunisia, Infosys and Google, and slightly worse on Nigeria and IBM.
+
+00:00:37.596 --> 00:00:40.770
+Every gap is about 1.3 percent or less.
+
+00:00:41.220 --> 00:00:48.566
+On the later stock years, 2015 to 2025, the differences remain tiny, and their signs change.
+
+00:00:49.016 --> 00:00:53.728
+So our honest reading: MODWT GARCH roughly matches raw GARCH.
+
+00:00:54.178 --> 00:00:55.701
+It does not clearly beat it.
+
+00:00:56.151 --> 00:00:58.696
+And the DWT version is slightly better.

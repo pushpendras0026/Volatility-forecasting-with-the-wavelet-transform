@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:01.666
+We used six series.
+
+00:00:02.116 --> 00:00:06.499
+Three are African indices: South Africa, Tunisia and Nigeria.
+
+00:00:06.949 --> 00:00:10.709
+Three are single stocks: Infosys, IBM and Google.
+
+00:00:11.159 --> 00:00:12.824
+Kenya was not in the final set.
+
+00:00:13.274 --> 00:00:15.246
+Time is split strictly in order.
+
+00:00:15.696 --> 00:00:25.264
+Training runs from 2004 to 2009, validation covers 2010 and 2011, and the test is 2012 to 2014.
+
+00:00:25.714 --> 00:00:31.185
+For the three stocks we also kept going, from 2015 to 2025.
+
+00:00:31.635 --> 00:00:33.871
+The forecasting engine is a rolling window.
+
+00:00:34.321 --> 00:00:37.627
+At most one thousand and twenty-four past days are used.
+
+00:00:38.077 --> 00:00:40.647
+Every twenty days the parameters are refitted.
+
+00:00:41.097 --> 00:00:43.857
+Each day we make one forecast for the next day.
+
+00:00:44.307 --> 00:00:46.979
+Model orders come from AIC on training data.
+
+00:00:47.429 --> 00:00:52.510
+Every other choice is made on validation, then frozen before any test day is scored.
+
+00:00:52.960 --> 00:00:57.270
+And the wavelet transform only ever sees the data that existed at that moment.
+
+00:00:57.720 --> 00:01:02.367
+That gives about seven hundred and fifty test forecasts per series, not five.

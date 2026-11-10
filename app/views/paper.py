@@ -61,7 +61,7 @@ fig = go.Figure()
 fig.add_trace(go.Bar(x=t12.country, y=t12.garch_mse, name="GARCH(1,1)", marker_color=C.RAW))
 fig.add_trace(go.Bar(x=t12.country, y=t12.modwt_garch_mse, name="MODWT-GARCH(1,1)", marker_color=C.MODWT))
 fig.update_layout(yaxis_type="log", height=300, barmode="group", yaxis_title="MSE (log scale)", margin=dict(l=10, r=10, t=10, b=10))
-st.plotly_chart(fig, width="stretch")
+C.show(fig, howto="Bars compare the paper's reported MSE for plain GARCH(1,1) (blue) with MODWT-GARCH(1,1) (green) for each country, on a log scale. A shorter green bar means the paper claims wavelets helped.")
 better = (t12.modwt_garch_mse < t12.garch_mse).sum()
 C.note(f"<b>Claim:</b> MODWT-GARCH(1,1) gives lower forecast MSE in {better} of {len(t12)} markets (all except Kenya) and lower "
        "AIC in all but South Africa; the abstract says GARCH(1,1) 'underestimates' while MODWT-GARCH 'generates an accurate "

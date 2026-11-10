@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:05.047
+GARCH, one comma one, says today's variance h t is built from three pieces.
+
+00:00:05.497 --> 00:00:06.760
+A constant omega.
+
+00:00:07.210 --> 00:00:09.490
+Alpha times yesterday's squared shock.
+
+00:00:09.940 --> 00:00:12.089
+And beta times yesterday's variance.
+
+00:00:12.539 --> 00:00:15.239
+Let's hit the model with a single shock and watch.
+
+00:00:15.689 --> 00:00:19.588
+Variance jumps, then decays back towards its long-run level.
+
+00:00:20.038 --> 00:00:22.852
+Alpha controls how hard the model reacts to news.
+
+00:00:23.302 --> 00:00:25.243
+Turn it up and the spike gets taller.
+
+00:00:25.693 --> 00:00:27.069
+Beta controls memory.
+
+00:00:27.519 --> 00:00:29.526
+Turn it up and the decay gets slower.
+
+00:00:29.976 --> 00:00:33.475
+The sum, alpha plus beta, is the persistence.
+
+00:00:33.925 --> 00:00:37.188
+It must stay below one for the variance to settle down.
+
+00:00:37.638 --> 00:00:44.787
+For South Africa's training window, our fitted alpha is about 0.11 and beta about 0.87.
+
+00:00:45.237 --> 00:00:47.929
+Persistence is about 0.99.
+
+00:00:48.379 --> 00:00:51.171
+A shock fades, but slowly, over weeks.
+
+00:00:51.621 --> 00:00:55.323
+That slow fade is exactly the clustering we saw in the opening.

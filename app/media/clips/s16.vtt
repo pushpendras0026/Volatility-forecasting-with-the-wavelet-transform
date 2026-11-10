@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:01.174
+What did we learn?
+
+00:00:01.624 --> 00:00:08.421
+First, GARCH earns its place: the ARCH tests and the fitted persistence both say volatility clusters.
+
+00:00:08.871 --> 00:00:13.533
+Second, the wavelet step does not reliably improve the forecast.
+
+00:00:13.983 --> 00:00:21.218
+MODWT roughly matches raw GARCH, and DWT is a little better on some series and a little worse on others.
+
+00:00:21.668 --> 00:00:25.869
+Third, heavier-tailed shocks usually help a little, but not everywhere.
+
+00:00:26.319 --> 00:00:31.680
+Fourth, simple averaging and a small neural network rarely beat a well specified GARCH.
+
+00:00:32.130 --> 00:00:44.092
+For future work: test whether the small differences are statistically significant, try longer forecast horizons and deeper wavelet levels, and weight ensemble members by their past accuracy instead of equally.
+
+00:00:44.542 --> 00:00:52.561
+The one sentence takeaway: in our tests, a strict rolling setup found the paper's wavelet advantage small and dataset dependent.

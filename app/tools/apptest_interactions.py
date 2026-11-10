@@ -9,7 +9,7 @@ def check(at, tag):
         fails.append((tag, at.exception[0].message)); print("FAIL", tag, at.exception[0].message)
 
 # Architecture navigator: every family and model
-at = AppTest.from_file(str(APP / "pages/3_Architecture_navigator.py"), default_timeout=300); at.run()
+at = AppTest.from_file(str(APP / "views/architecture.py"), default_timeout=300); at.run()
 fams = at.selectbox[0].options
 n = 0
 for i, f in enumerate(fams):
@@ -20,14 +20,14 @@ print("architectures tested:", n)
 
 # Concepts with each dataset
 for ds in ["south_africa", "tunisia", "nigeria", "india_infosys", "usa_ibm", "google_class_a"]:
-    at = AppTest.from_file(str(APP / "pages/1_Concepts.py"), default_timeout=300); at.run()
+    at = AppTest.from_file(str(APP / "views/concepts.py"), default_timeout=300); at.run()
     at.sidebar.selectbox[0].select_index(["south_africa", "tunisia", "nigeria", "india_infosys", "usa_ibm", "google_class_a"].index(ds)).run(); check(at, f"concepts {ds}")
 for ds in ["nigeria", "google_class_a"]:
     at = AppTest.from_file(str(APP / "Overview.py"), default_timeout=300); at.run()
     at.selectbox[0].select_index(["south_africa", "tunisia", "nigeria", "india_infosys", "usa_ibm", "google_class_a"].index(ds)).run(); check(at, f"home {ds}")
 
 # Results explorer: later period, other datasets
-at = AppTest.from_file(str(APP / "pages/4_Results_explorer.py"), default_timeout=300); at.run()
+at = AppTest.from_file(str(APP / "views/results.py"), default_timeout=300); at.run()
 for r in at.radio:
     if "later" in r.options:
         r.set_value("later").run(); check(at, f"results radio {r.label} later")
@@ -36,7 +36,7 @@ for s in at.selectbox:
         s.set_value("usa_ibm").run(); check(at, f"results {s.label} ibm")
 
 # Parameter lab: run a few short configurations
-at = AppTest.from_file(str(APP / "pages/5_Parameter_lab.py"), default_timeout=600); at.run()
+at = AppTest.from_file(str(APP / "views/lab.py"), default_timeout=600); at.run()
 for tr, dist in [("raw", "gaussian"), ("modwt", "student_t"), ("dwt", "ged")]:
     t = time.time()
     at.slider[0].set_value(20)

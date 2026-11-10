@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:02.125
+Let's make the target concrete.
+
+00:00:02.575 --> 00:00:03.729
+Start with prices.
+
+00:00:04.179 --> 00:00:08.237
+The log return is the log of today's price minus the log of yesterday's.
+
+00:00:08.687 --> 00:00:15.447
+Here are real closing values from South Africa in early January 2012, and the returns they produce.
+
+00:00:15.897 --> 00:00:19.926
+Returns are small numbers, a fraction of a percent on most days.
+
+00:00:20.376 --> 00:00:23.333
+Now take the average of the last twenty returns.
+
+00:00:23.783 --> 00:00:25.100
+Call it r bar twenty.
+
+00:00:25.550 --> 00:00:27.815
+Tomorrow's return will land somewhere.
+
+00:00:28.265 --> 00:00:31.450
+Its distance from that recent average is the surprise.
+
+00:00:31.900 --> 00:00:35.358
+Square the surprise and you get our target, y t plus one.
+
+00:00:35.808 --> 00:00:40.863
+It is always positive, and it is large exactly on the days the market moves a lot.
+
+00:00:41.313 --> 00:00:45.790
+This squared deviation is a noisy stand-in for the true, hidden variance.
+
+00:00:46.240 --> 00:00:55.766
+Every model in this video produces a forecast, y hat, of this same quantity, and we score them all by root mean squared error on days they never saw.

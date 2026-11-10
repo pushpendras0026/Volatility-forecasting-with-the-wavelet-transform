@@ -1,6 +1,11 @@
-# No fixed base theme: the app follows the viewer's light/dark setting.
 [theme]
-primaryColor = "#1B9E77"
+base = "dark"
+primaryColor = "#3DDCB0"
+backgroundColor = "#121826"
+secondaryBackgroundColor = "#1B2438"
+textColor = "#E9EEF7"
+font = "sans serif"
+borderColor = "#2F3C57"
 
 [server]
 headless = true

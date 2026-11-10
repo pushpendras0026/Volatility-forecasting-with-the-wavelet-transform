@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:04.495
+This is eleven years of daily returns from the South African stock market.
+
+00:00:04.945 --> 00:00:07.345
+Most days, the line barely moves.
+
+00:00:07.795 --> 00:00:09.308
+But look at 2008.
+
+00:00:09.758 --> 00:00:12.904
+The swings get large, and they stay large for months.
+
+00:00:13.354 --> 00:00:17.075
+Big moves follow big moves, and calm follows calm.
+
+00:00:17.525 --> 00:00:20.160
+Economists call this volatility clustering.
+
+00:00:20.610 --> 00:00:26.449
+If we trace the typical size of the moves over the last twenty days, the clusters become obvious.
+
+00:00:26.899 --> 00:00:28.995
+And that raises a practical question.
+
+00:00:29.445 --> 00:00:33.668
+If volatility clusters, then today should tell us something about tomorrow.
+
+00:00:34.118 --> 00:00:36.554
+Can we forecast tomorrow's volatility?
+
+00:00:37.004 --> 00:00:46.672
+And a more specific question, from a 2016 paper we set out to test: does first passing the returns through a wavelet transform make those forecasts better?

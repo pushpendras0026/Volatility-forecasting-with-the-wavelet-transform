@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:02.453
+Does that better fit improve forecasts?
+
+00:00:02.903 --> 00:00:09.470
+We compared all three distributions in 27 groups: each dataset, each pipeline, each period.
+
+00:00:09.920 --> 00:00:15.982
+By lowest mean squared error, GED wins 10, Student t 13, and Gaussian 4.
+
+00:00:16.432 --> 00:00:22.359
+By mean absolute error, GED wins 18, Student t 6, and Gaussian 3.
+
+00:00:22.809 --> 00:00:24.865
+But counting wins hides the size.
+
+00:00:25.315 --> 00:00:27.064
+Look at the actual changes.
+
+00:00:27.514 --> 00:00:32.950
+For Tunisia's DWT model, Student t cuts MSE by 6.6 percent.
+
+00:00:33.400 --> 00:00:39.354
+For Infosys' DWT model in the later years, it raises MSE by 1.4 percent.
+
+00:00:39.804 --> 00:00:45.371
+For Google's MODWT model in the later years, it cuts MSE by 1.2 percent.
+
+00:00:45.821 --> 00:00:50.445
+For South Africa's raw GARCH, it cuts MSE by 0.1 percent.
+
+00:00:50.895 --> 00:00:57.410
+And for IBM's DWT model in the later years, Student t cuts MSE by 1.3 percent.
+
+00:00:57.860 --> 00:01:03.841
+Heavier tails help more often than not, but the gain depends on the data, and it can be negative.

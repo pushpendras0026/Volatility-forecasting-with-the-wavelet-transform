@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:03.073
+Before modelling, look at the shape of returns.
+
+00:00:03.523 --> 00:00:08.761
+Here are South Africa's daily returns, standardized, with a normal curve fitted on top.
+
+00:00:09.211 --> 00:00:10.349
+The middle looks fine.
+
+00:00:10.799 --> 00:00:12.263
+The trouble is in the tails.
+
+00:00:12.713 --> 00:00:18.109
+A normal distribution says a move beyond four standard deviations should almost never happen.
+
+00:00:18.559 --> 00:00:21.799
+In this data it happens about once every two hundred days.
+
+00:00:22.249 --> 00:00:24.404
+One way to measure this is kurtosis.
+
+00:00:24.854 --> 00:00:27.451
+A normal distribution has kurtosis three.
+
+00:00:27.901 --> 00:00:31.870
+South Africa sits near seven, the stocks between nine and fifteen.
+
+00:00:32.320 --> 00:00:34.576
+And Tunisia shows over five hundred.
+
+00:00:35.026 --> 00:00:38.517
+That number comes from two days in September 2004.
+
+00:00:38.967 --> 00:00:43.445
+The index falls by twenty-seven percent, and climbs back the next day.
+
+00:00:43.895 --> 00:00:48.625
+That pattern looks like a data error, and the project flags it rather than deleting it.
+
+00:00:49.075 --> 00:00:52.794
+Without those two days, Tunisia's kurtosis is about fifteen.
+
+00:00:53.244 --> 00:00:54.980
+Either way the lesson is the same.
+
+00:00:55.430 --> 00:01:00.046
+A Gaussian model treats extreme days as near impossible, so it underweights them.
+
+00:01:00.496 --> 00:01:03.532
+We will come back to that with heavier-tailed distributions.

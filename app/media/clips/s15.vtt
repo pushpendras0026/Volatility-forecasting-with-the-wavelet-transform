@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:02.281
+The third extension is a black box.
+
+00:00:02.731 --> 00:00:07.525
+A small neural network, a multilayer perceptron, sees seven inputs.
+
+00:00:07.975 --> 00:00:11.817
+The last five targets, and their five-day and twenty-day averages.
+
+00:00:12.267 --> 00:00:17.141
+It has one hidden layer of three or five units, and one output, clipped at zero.
+
+00:00:17.591 --> 00:00:22.421
+Validation picks the size and the weight decay, and we train with three random seeds.
+
+00:00:22.871 --> 00:00:24.123
+The result is clear.
+
+00:00:24.573 --> 00:00:29.559
+On the test years the network's error is higher than raw GARCH on every one of the six series.
+
+00:00:30.009 --> 00:00:35.524
+From about 2 percent higher for IBM, to about 3.0 times the error for Infosys.
+
+00:00:35.974 --> 00:00:40.551
+With little data and a very noisy target, structure beats flexibility here.

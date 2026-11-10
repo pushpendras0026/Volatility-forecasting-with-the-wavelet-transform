@@ -39,12 +39,12 @@ mid = labels[c2.selectbox("Model", list(labels), key=f"model_{fam}")]
 st.markdown(f"## {C.friendly(mid)}  `{mid}`")
 
 
-def node(name, label, col="#eeeeee", font="black"):
+def node(name, label, col="#1C2536", font="#E6EAF2"):
     return f'{name} [label="{label}", fillcolor="{col}", fontcolor="{font}"];'
 
 
 def dot(body):
-    return ('digraph G { rankdir=LR; node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11]; '
+    return ('digraph G { rankdir=LR; bgcolor="transparent"; edge [color="#8A94A6", fontcolor="#B5BDCB"]; node [shape=box, style="rounded,filled", color="#3A475C", fontname="Helvetica", fontsize=11]; '
             + body + " }")
 
 
@@ -66,7 +66,7 @@ if mid.startswith(("raw_", "dwt_", "modwt_")):
               "modwt": "overlapping Haar MODWT\\nw_t=(r_t − r_t−1)/2"}[tr]
     order = "order (p, q+1) from raw ARMA" if extra else f"ARMA(p,q), AIC, p,q ≤ {cfg['max_pq']}"
     var = f"GARCH(1,1), {dist} innovations\\non fixed ARMA residuals" if garch else "constant variance σ²"
-    body = (node("P", "prices → log returns r_t") + node("T", tlabel, col, "white") + node("M", order) +
+    body = (node("P", "prices → log returns r_t") + node("T", tlabel, col, "#0B0F17") + node("M", order) +
             node("V", var) + node("S", "restore return moments\\nμ_r, h_r") +
             node("Y", "ŷ = h_r + (μ_r − r̄20)²") + "P->T->M->V->S->Y;")
     st.graphviz_chart(dot(body))
@@ -106,7 +106,7 @@ elif mid.startswith("mra_"):
     J = 1 if j1 else 2
     col = C.PIPE_COLOURS[tr_]
     comps = [f"A{J}"] + [f"D{j}" for j in range(J, 0, -1)]
-    body = node("Y0", "past targets y (observed prefix)") + node("W", f"{tr_.upper()} {filt}, J={J}\\nprefix reflection", col, "white")
+    body = node("Y0", "past targets y (observed prefix)") + node("W", f"{tr_.upper()} {filt}, J={J}\\nprefix reflection", col, "#0B0F17")
     for c in comps:
         model = "ARMA (AIC, p,q ≤ 2)" if (alloc == "all_arima" or c.startswith("A")) else "AR(1) mean\\n+ residual GARCH"
         body += node(c, f"{c}: {model}") + f"W->{c}; {c}->S;"

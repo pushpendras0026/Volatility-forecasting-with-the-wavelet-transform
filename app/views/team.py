@@ -30,7 +30,7 @@ st.markdown(
 | Innovation-distribution extension | `Distribution/` |
 | Prepared data and provenance | `data/` (`manifest.csv`, `issues.csv`) |
 | Report | `report/` |
-| This application | `app/` (`Overview.py`, `pages/`, `lib/`, `tools/`) |
+| This application | `app/` (`Overview.py`, `views/`, `lib/`, `tools/`) |
     """)
 
 st.header("Reproducing the results")

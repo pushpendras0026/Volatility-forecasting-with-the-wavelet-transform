@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:02.170
+The first model layer is for the mean.
+
+00:00:02.620 --> 00:00:07.738
+An ARMA model predicts today's return from a few past returns and past errors.
+
+00:00:08.188 --> 00:00:14.269
+We choose its orders by AIC, trying every p and q up to three, using only the training years.
+
+00:00:14.719 --> 00:00:17.369
+What is left over are the residuals, e t.
+
+00:00:17.819 --> 00:00:23.578
+For most series they show little linear pattern, although Tunisia's serial test is significant.
+
+00:00:24.028 --> 00:00:25.951
+Their squares are a different story.
+
+00:00:26.401 --> 00:00:28.763
+Big squared residuals bunch together.
+
+00:00:29.213 --> 00:00:35.676
+To test this, regress the squared residuals on twelve of their own lags and compute an F statistic.
+
+00:00:36.126 --> 00:00:37.410
+This is the ARCH test.
+
+00:00:37.860 --> 00:00:43.938
+For Nigeria's raw returns the F statistic is about 8, with a p value far below one percent.
+
+00:00:44.388 --> 00:00:45.954
+There is significant ARCH.
+
+00:00:46.404 --> 00:00:54.778
+After fitting a GARCH model and standardizing the residuals, the same test gives an F of about 0.4, which is not significant.
+
+00:00:55.228 --> 00:00:58.420
+The MODWT version tells the same story.
+
+00:00:58.870 --> 00:01:01.456
+So a model for changing variance is justified.
+
+00:01:01.906 --> 00:01:07.543
+Note what this does not say: passing a diagnostic is not the same as forecasting well.

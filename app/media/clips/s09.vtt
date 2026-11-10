@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.250 --> 00:00:06.203
+The paper we replicate is by Ismail, Audu and Tumala, published in 2016.
+
+00:00:06.653 --> 00:00:16.100
+They took daily index returns from four African markets, Kenya, Nigeria, South Africa and Tunisia, from 2000 to 2014.
+
+00:00:16.550 --> 00:00:28.468
+They compared a standard GARCH one one against a new MODWT GARCH one one, choosing ARMA orders by AIC and scoring one-step forecasts over the final days of each sample by mean squared error.
+
+00:00:28.918 --> 00:00:35.483
+Their conclusion: MODWT GARCH produced smaller forecasting errors for every country except Kenya.
+
+00:00:35.933 --> 00:00:39.145
+The evaluation covered only a few final days per market.
+
+00:00:39.595 --> 00:00:41.175
+That is a very small test.
+
+00:00:41.625 --> 00:00:45.769
+Our question was whether the claim survives a much larger, stricter test.

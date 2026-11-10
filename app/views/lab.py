@@ -123,12 +123,12 @@ with tab_run:
                                  line=dict(color=C.PIPE_COLOURS[transform], width=2)))
         if rf is not None and len(rf):
             fig.add_trace(go.Scatter(x=rf.target_date, y=rf.prediction * 1e4, name=f"saved R: {C.friendly(rf.model_id.iloc[0])}",
-                                     line=dict(color="black", width=1, dash="dot")))
+                                     line=dict(color=C.TEXT, width=1, dash="dot")))
         rd = out[out.refitted]
         fig.add_trace(go.Scatter(x=rd.target_date, y=np.zeros(len(rd)), mode="markers", name="refit days",
                                  marker=dict(symbol="triangle-up", color=C.PAPER, size=8)))
         fig.update_layout(height=400, yaxis_title="y × 1e4", legend=dict(orientation="h"), margin=dict(l=10, r=10, t=10, b=10))
-        st.plotly_chart(fig, width="stretch")
+        C.show(fig, howto='Grey is the actual target; coloured lines are forecasts from this lab (and the saved R forecast when shown). Dots on the baseline mark refit days. The closer a line follows the grey peaks without overshooting, the better the forecast.')
 
         rows = [dict(forecast=f"Python {transform} ARMA({p},{q})-GARCH(1,1) {C.DIST_LABELS[dist]}", **R.metrics(out.actual, out.prediction)),
                 dict(forecast="Trailing 20-day mean of y (baseline)", **R.metrics(out.actual, out.trailing_mean))]
@@ -162,7 +162,7 @@ with tab_run:
             figp.add_trace(go.Scatter(x=rr.target_date, y=rr.beta, name="β", mode="lines+markers"), 1, 1)
             figp.add_trace(go.Scatter(x=rr.target_date, y=rr["persistence α+β"], name="α+β", mode="lines+markers"), 1, 2)
             figp.update_layout(height=280, margin=dict(l=10, r=10, t=30, b=10))
-            st.plotly_chart(figp, width="stretch")
+            C.show(figp, howto='Left: estimated α (reaction to shocks) and β (memory) at each refit. Right: persistence α+β; values near 1 mean volatility shocks fade very slowly.')
             st.dataframe(rr, hide_index=True, width="stretch")
         with st.expander("Per-day output (mean, variance, moving mean, forecast)"):
             st.dataframe(out, hide_index=True, width="stretch")
@@ -185,10 +185,10 @@ with tab_run:
     case = st.selectbox("Show a validation case", vs.case.tolist())
     z = vf[vf.case == case]
     figv = go.Figure()
-    figv.add_trace(go.Scatter(x=z.target_date, y=z.prediction_R * 1e4, name="R (saved)", line=dict(color="black")))
+    figv.add_trace(go.Scatter(x=z.target_date, y=z.prediction_R * 1e4, name="R (saved)", line=dict(color=C.TEXT)))
     figv.add_trace(go.Scatter(x=z.target_date, y=z.prediction_py * 1e4, name="Python", line=dict(color=C.DWT, dash="dash")))
     figv.update_layout(height=280, yaxis_title="forecast × 1e4", margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(figv, width="stretch")
+    C.show(figv, howto='R (saved, white) against this Python re-implementation (dashed). Where the two overlap, the Python lab reproduces the R result; gaps show the approximation error documented in VALIDATION.md.')
 
 # ============================================================================ simulator
 with tab_sim:
@@ -226,7 +226,7 @@ with tab_sim:
     figs.add_trace(go.Bar(x=list(range(1, 21)), y=acf(e), marker_color=C.RAW), 2, 2)
     figs.add_trace(go.Bar(x=list(range(1, 21)), y=acf(e ** 2), marker_color=C.DWT), 2, 2)
     figs.update_layout(height=560, showlegend=False, margin=dict(l=10, r=10, t=40, b=10))
-    st.plotly_chart(figs, width="stretch")
+    C.show(figs, howto='Top-left: simulated returns. Top-right: the conditional volatility the model assigns each day (it rises after big moves). Bottom-left: histogram of the simulated returns against the normal bell curve (red); fatter tails show as bars outside the curve. Bottom-right: autocorrelation of returns (blue, near 0) and of squared returns (orange, persistent): the clustering signature.')
     kurt = float(np.mean(zz ** 4))
     st.markdown(f"Sample kurtosis of ε: **{kurt:.2f}** (normal = 3). Even Gaussian innovations give kurtosis above 3 when the variance "
                 "changes over time: volatility clustering itself creates fat tails.")

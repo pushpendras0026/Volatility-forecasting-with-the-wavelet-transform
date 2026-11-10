@@ -42,6 +42,7 @@ def acf(x, nlags=30):
 
 # ============================================================================ 1
 with tabs[0]:
+    C.micro("proof_target")
     term("Log return")
     st.markdown("**Intuition:** the continuously compounded percentage change of the price from one day to the next. "
                 "Log returns add up over time and are roughly the percentage change for small moves.")
@@ -67,7 +68,7 @@ with tabs[0]:
     fig.add_trace(go.Scatter(x=tail.Date, y=tail.y * 1e4, line=dict(color=C.ACTUAL, width=1), name="y (x 1e4)"))
     fig.add_trace(go.Scatter(x=tail.Date, y=tail.y.rolling(20).mean() * 1e4, line=dict(color=C.RAW), name="20-day average of y"))
     fig.update_layout(height=280, margin=dict(l=10, r=10, t=10, b=10), yaxis_title="x 1e4")
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Grey is the daily target <i>y</i> (squared deviation of the return from its recent mean, scaled by 10⁴); the coloured line is its 20-day average. Spikes that bunch together are volatility clustering: the average stays high for weeks after a shock.')
     st.caption(f"Real data, {C.label(ds)}, last 500 days of the file. The proxy is highly dispersed: a single large move dominates. "
                "That is why even a perfect variance forecast has a low R².")
 
@@ -92,7 +93,7 @@ with tabs[0]:
         fig.add_hline(y=band, line_dash="dot", row=1, col=c)
         fig.add_hline(y=-band, line_dash="dot", row=1, col=c)
     fig.update_layout(height=280, showlegend=False, margin=dict(l=10, r=10, t=30, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Each bar is the autocorrelation at that lag (days apart). Left: returns themselves are nearly uncorrelated (bars near 0). Right: squared returns stay positively correlated for many lags, which is the signature that a GARCH model exploits.')
     st.caption("Real data. Dotted lines: approximate 95% band for white noise.")
 
     term("Heteroskedasticity and the ARCH effect")
@@ -115,6 +116,7 @@ with tabs[0]:
 
 # ============================================================================ 2
 with tabs[1]:
+    C.micro("proof_garch_uncond")
     term("ARMA(p, q): the conditional mean")
     st.markdown("**Intuition:** today's value is a constant plus a weighted sum of the last p values (AR part) and of the last q "
                 "forecast errors (MA part). It models the *mean*, with a **constant** error variance.")
@@ -135,7 +137,7 @@ with tabs[1]:
     fig.add_trace(go.Scatter(y=x, line=dict(color=C.RAW, width=1)), 1, 1)
     fig.add_trace(go.Bar(x=list(range(1, 21)), y=acf(x, 20), marker_color=C.RAW), 1, 2)
     fig.update_layout(height=260, showlegend=False, margin=dict(l=10, r=10, t=30, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto="Left is one simulated ARMA path; right its autocorrelation function. The bar heights show how long the 'memory' of the mean model lasts; change φ and θ to see the pattern decay faster or slower.")
 
     term("GARCH(1,1): the conditional variance")
     st.markdown("**Intuition:** tomorrow's variance = a floor ω + a reaction α to today's surprise + a memory β of today's variance. "
@@ -165,7 +167,7 @@ with tabs[1]:
         fig.add_trace(go.Scatter(y=2 * np.sqrt(h), line=dict(color=C.RAW, width=1)), 1, 2)
         fig.add_trace(go.Scatter(y=-2 * np.sqrt(h), line=dict(color=C.RAW, width=1)), 1, 2)
         fig.update_layout(height=300, showlegend=False, margin=dict(l=10, r=10, t=30, b=10))
-        st.plotly_chart(fig, width="stretch")
+        C.show(fig, howto='Left: after a one-off shock the conditional variance jumps and then decays back to the long-run level of 1; the decay speed is set by α+β (persistence). Right: simulated returns (grey) inside ±2 conditional standard deviations (coloured bands), which widen and narrow with the variance.')
         st.markdown(f"Persistence α+β = **{pers:.2f}**; half-life of a variance shock ≈ **{hl:.1f} days**. "
                     "Blue lines in the right plot: ±2 conditional standard deviations.")
     par = C.read_csv("results/tables/initial_diagnostics.csv")
@@ -183,6 +185,7 @@ with tabs[1]:
 
 # ============================================================================ 3
 with tabs[2]:
+    C.micro("proof_ll_gaussian", "effect_gaussian_sigma", "proof_aic")
     term("Likelihood and maximum likelihood (MLE)")
     st.markdown("**Intuition:** the likelihood is the probability (density) of the data we actually observed, as a function of the "
                 "parameters. MLE picks the parameters that make the observed data most probable. We maximise the log, ℓ.")
@@ -202,7 +205,7 @@ with tabs[2]:
         lls.append(-0.5 * np.sum(np.log(2 * np.pi) + np.log(h) + z ** 2 / h))
     fig = go.Figure(go.Scatter(x=alphas, y=lls, line=dict(color=C.RAW)))
     fig.update_layout(height=260, xaxis_title="α", yaxis_title="log-likelihood (scaled data)", margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Each point is the Gaussian log-likelihood of the data for a given α. Higher is better; the peak is the maximum-likelihood estimate that fitting software searches for.')
     st.caption(f"Real data: last 1,024 demeaned returns of {C.label(ds)}, with ω set so the long-run variance matches the sample.")
 
     term("AIC and BIC")
@@ -222,7 +225,7 @@ with tabs[2]:
         fig = go.Figure(go.Heatmap(z=dpiv.values, x=[f"q={c}" for c in dpiv.columns], y=[f"p={i}" for i in dpiv.index],
                                    text=np.round(dpiv.values, 1), texttemplate="%{text}", colorscale="Blues", reversescale=True))
         fig.update_layout(height=300, margin=dict(l=10, r=10, t=30, b=10), title=f"Δ{crit} = {crit}(p,q) − min")
-        st.plotly_chart(fig, width="stretch")
+        C.show(fig, howto='Each cell is the information criterion of an ARMA(p,q) minus the best one in the grid. Darker/lower values are better; the cell with 0 is the order the AIC/BIC search picks. A smaller number means a better balance of fit and simplicity.')
         best = gg.loc[gg[crit].idxmin()]
         chosen = gg[gg.chosen.astype(str).str.upper() == "TRUE"]
         st.caption(f"Real data, `tables/aic_candidate_grids.csv`. Minimum {crit}: ({int(best.p)},{int(best.q)}). "
@@ -238,6 +241,14 @@ with tabs[3]:
     st.latex(r"\text{GED: } f(z)=\frac{b}{2a\,\Gamma(1/b)}\exp\!\big(-|z/a|^b\big),\quad a=\sqrt{\Gamma(1/b)/\Gamma(3/b)}")
     st.markdown("GED shape b = 2 is exactly Gaussian; b = 1 is Laplace; b < 2 gives fatter tails and a sharper peak. "
                 "Student-t approaches Gaussian as ν → ∞. (Formulas as in `R/models.R` and `Distribution/innovation_distribution_robustness.R`.)")
+    st.markdown("#### Derivations and parameter effects, one distribution at a time")
+    dtab = st.tabs(["Gaussian", "Student-t", "GED"])
+    with dtab[0]:
+        C.micro("proof_ll_gaussian", "effect_gaussian_sigma")
+    with dtab[1]:
+        C.micro("proof_ll_student_t", "effect_student_nu")
+    with dtab[2]:
+        C.micro("proof_ll_ged", "effect_ged_shape")
     c1, c2, c3 = st.columns(3)
     nu = c1.slider("Student-t ν", 2.1, 30.0, 5.0, 0.1)
     b = c2.slider("GED shape b", 0.5, 3.0, 1.3, 0.05)
@@ -251,7 +262,7 @@ with tabs[3]:
                           (f_g, f"GED b={b:g}", C.DIST_COLOURS["ged"])]:
         fig.add_trace(go.Scatter(x=zs, y=y_, name=name, line=dict(color=col)))
     fig.update_layout(height=320, yaxis_type="log" if logy else "linear", margin=dict(l=10, r=10, t=10, b=10), xaxis_title="z")
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Density curves of the candidate innovation distributions (use the log switch to expose the tails). Where a curve sits higher far from the centre, that distribution assigns more probability to extreme days; Student-t and GED do, Gaussian does not.')
     ks = [2, 3, 4, 5]
     t_scale = math.sqrt((nu - 2) / nu)
     a = math.sqrt(math.gamma(1 / b) / math.gamma(3 / b))
@@ -286,7 +297,31 @@ with tabs[3]:
                "data and is not comparable with our prepared files.")
 
 # ============================================================================ 5
+    st.markdown("#### Fit the shape parameter on real returns (profile likelihood)")
+    st.markdown("Standardise the returns of the selected dataset (constant-variance simplification, so this is only an illustration "
+                "of tail weight, not the GARCH fit) and compute the total log-likelihood for each value of the shape parameter. "
+                "The peak is the maximum-likelihood shape; the dotted line is the Gaussian log-likelihood.")
+    zr = D["r"].to_numpy(); zr = (zr - zr.mean()) / zr.std()
+    nus = np.linspace(2.2, 40, 160); bs = np.linspace(0.6, 3.0, 120)
+    ll_n = float(stats.norm.logpdf(zr).sum())
+    ll_t = np.array([R.t_std_logpdf(zr, v).sum() for v in nus])
+    ll_g = np.array([R.ged_logpdf(zr, v).sum() for v in bs])
+    pc1, pc2 = st.columns(2)
+    for col, xs_, ll_, nm, colr, lab_ in [(pc1, nus, ll_t, "Student-t", C.DIST_COLOURS["student_t"], "ν"),
+                                         (pc2, bs, ll_g, "GED", C.DIST_COLOURS["ged"], "shape b")]:
+        with col:
+            fg = go.Figure(go.Scatter(x=xs_, y=ll_, line=dict(color=colr), name=nm))
+            fg.add_hline(y=ll_n, line=dict(color=C.DIST_COLOURS["gaussian"], dash="dot"))
+            k = int(np.argmax(ll_))
+            fg.add_trace(go.Scatter(x=[xs_[k]], y=[ll_[k]], mode="markers", marker=dict(size=10, color=C.PAPER), name="maximum"))
+            fg.update_layout(height=300, xaxis_title=lab_, yaxis_title="total log-likelihood", margin=dict(l=10, r=10, t=10, b=10))
+            C.show(fg, howto=f"Total log-likelihood of the real returns as the {nm} shape ({lab_}) varies. Higher is better. The red dot is the best "
+                             f"value ({lab_} ≈ {xs_[k]:.2f}); the dotted line is the Gaussian. A peak far above the dotted line means the data are "
+                             "clearly non-Gaussian and the heavier-tailed model explains them better.")
+            st.metric(f"Gain over Gaussian (log-likelihood)", f"{ll_[k] - ll_n:,.1f}")
+
 with tabs[4]:
+    C.micro("proof_haar_recon")
     term("Wavelets and wavelet filters (Haar, db4, db6)")
     st.markdown("**Intuition:** a wavelet transform splits a series into pieces that live at different **time scales**: a smooth "
                 "slow part (approximation) and fast wiggles (details), while keeping *when* things happen. "
@@ -298,7 +333,7 @@ with tabs[4]:
     fig.add_trace(go.Bar(y=g, marker_color=C.RAW), 1, 1)
     fig.add_trace(go.Bar(y=h, marker_color=C.DWT), 1, 2)
     fig.update_layout(height=250, showlegend=False, margin=dict(l=10, r=10, t=30, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Bars are the filter coefficients (taps). The scaling filter g averages neighbouring values (low-pass); the wavelet filter h differences them (high-pass). Their lengths depend on the chosen wavelet family.')
     st.markdown("Haar is the simplest: $g=(1,1)/\\sqrt2$ (pairwise average), $h=(1,-1)/\\sqrt2$ (pairwise difference). "
                 "'db4' and 'db6' (Daubechies) have 4 and 6 vanishing moments (8 and 12 taps): smoother, but longer, so more "
                 "boundary effects. Coefficients are those in `R/wavelets.R`.")
@@ -327,7 +362,7 @@ with tabs[4]:
     fig.add_trace(go.Bar(y=mod2 * 100, marker_color=C.MODWT), 1, 1)
     fig.add_trace(go.Bar(x=np.arange(1, 2 * len(dwt2), 2), y=dwt2 * 100, marker_color=C.DWT), 1, 2)
     fig.update_layout(height=260, showlegend=False, margin=dict(l=10, r=10, t=30, b=10), yaxis_title="% ")
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto="Both panels decompose the same returns. The overlapping MODWT (green) produces one detail value per day; the paired DWT (orange) produces half as many because it moves in steps of two. Bars show the high-frequency 'wiggle' component in %.")
     st.caption("Real data, last returns. With the shift box ticked, the MODWT bars simply move one place; the DWT pairs are formed "
                "from different days, so the DWT values change. The DWT model also has only about half as many observations to fit.")
 
@@ -354,7 +389,7 @@ with tabs[4]:
     for i, (k, v) in enumerate(comps.items(), start=2):
         fig.add_trace(go.Scatter(y=v, line=dict(color=C.MODWT if meth == "modwt" else C.DWT, width=1)), i, 1)
     fig.update_layout(height=120 * (len(comps) + 1) + 60, showlegend=False, margin=dict(l=10, r=10, t=30, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Top row is the target; the rows below are its multi-resolution components. Fine-scale components capture day-to-day noise, coarse ones slow swings; added together they rebuild the original series.')
     err = np.max(np.abs(yy - sum(comps.values())))
     st.caption(f"Real data: last 256 targets. Max reconstruction error |y − ΣA,D| = {err:.1e} (exact additivity). "
                "Boundary: reflection of the observed prefix only.")
@@ -384,7 +419,7 @@ with tabs[5]:
                                  showlegend=False))
         fig.add_trace(go.Scatter(x=[t + 1], y=[t], mode="markers", marker=dict(color=C.PAPER, size=7), showlegend=False))
     fig.update_layout(height=260, xaxis_title="day", yaxis_title="forecast origin", margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Each horizontal bar is the data window used for the forecast made on the day marked by the red dot. Thick bars are days on which the model is re-estimated; thin ones reuse the last fit. The window slides forward through time.')
     st.caption("Blue bar: data used at that origin (thick = a refit day). Red dot: the day being forecast.")
 
     term("Look-ahead leakage")
@@ -441,6 +476,7 @@ with tabs[6]:
 
 # ============================================================================ 8
 with tabs[7]:
+    C.micro("proof_ensemble")
     term("Ensembles (equal-weight forecast averaging)")
     st.markdown("Average the forecasts of K models: $\\hat y^{ens}=\\frac1K\\sum_k\\hat y^{(k)}$. Errors that are not perfectly "
                 "correlated partly cancel. No weights are fitted on test data. If any member fails on a date, the ensemble is "
@@ -464,4 +500,4 @@ with tabs[7]:
         w, b0 = rng.normal(0, 1.5), rng.normal(0, 1)
         fig.add_trace(go.Scatter(x=xs, y=1 / (1 + np.exp(-(w * xs + b0))), line=dict(width=1), name=f"unit {i + 1}"))
     fig.update_layout(height=240, margin=dict(l=10, r=10, t=10, b=10), title="random sigmoid units: the output is a weighted sum")
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Each coloured curve is one hidden unit: a sigmoid of a weighted input. The network output is a weighted sum of such curves, which lets it draw flexible non-linear shapes.')

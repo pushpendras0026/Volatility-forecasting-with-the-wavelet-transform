@@ -20,7 +20,7 @@ st.markdown(f"All values are read from the final R run `{C.read_text('results/RU
             "shown × 10,000. Lower is better. Positive '% gain' means lower MSE than the comparator.")
 
 tabs = st.tabs(["Core three pipelines", "Explore any models", "Forecast vs actual", "Extensions vs raw GARCH",
-                "Distributions (Ext. 1)", "Ensembles (Ext. 2)", "MLP (Ext. 3)", "Settings sensitivity", "Diagnostics"])
+                "Distributions (Ext. 1)", "Ensembles (Ext. 2)", "MLP (Ext. 3)", "Settings sensitivity", "Diagnostics", "Head-to-head"])
 
 # ============================================================================ core
 with tabs[0]:
@@ -35,13 +35,14 @@ with tabs[0]:
     st.dataframe(piv.style.format("{:.4f}", subset=["A: Raw GARCH", "B: DWT-GARCH", "C: MODWT-GARCH"])
                  .highlight_min(axis=1, subset=["A: Raw GARCH", "B: DWT-GARCH", "C: MODWT-GARCH"], color="rgba(27,158,119,0.25)"),
                  width="stretch")
+    C.download(piv.reset_index(names="dataset"), "core_rmse_test.csv")
     ratio = piv[["A: Raw GARCH", "B: DWT-GARCH", "C: MODWT-GARCH"]].div(piv["A: Raw GARCH"], axis=0)
     fig = go.Figure()
     for col, c in zip(ratio.columns, [C.RAW, C.DWT, C.MODWT]):
         fig.add_trace(go.Bar(x=ratio.index, y=ratio[col], name=col, marker_color=c))
     fig.add_hline(y=1, line_dash="dot")
     fig.update_layout(barmode="group", height=320, yaxis_title="RMSE / raw GARCH RMSE", margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto="Each bar is a model's RMSE divided by raw-GARCH RMSE. Below 1 means better than raw GARCH, above 1 worse. Bars within a few percent of 1 mean the wavelet pre-processing barely changes accuracy.")
     mw = (piv["C: MODWT-GARCH"] < piv["A: Raw GARCH"]).sum()
     dw = (piv["B: DWT-GARCH"] < piv["A: Raw GARCH"]).sum()
     gaps = (100 * (piv["C: MODWT-GARCH"] / piv["A: Raw GARCH"] - 1)).abs()
@@ -84,7 +85,7 @@ with tabs[1]:
                      color_discrete_map={m: C.model_colour(m) for m in res.model_id})
         fig.update_layout(showlegend=False, height=max(250, 28 * len(res)), yaxis_title="",
                           xaxis_title=f"{metric}" + {1e4: " × 1e4", 1e8: " × 1e8", 1: ""}[scale], margin=dict(l=10, r=10, t=10, b=10))
-        st.plotly_chart(fig, width="stretch")
+        C.show(fig, howto='Horizontal bars rank the models for the chosen metric; shorter is better. Green, orange and blue families follow the same colour code as the rest of the app.')
         st.dataframe(res[["name", "model_id", "n", "MSE", "RMSE", "MAE", "R2"]], hide_index=True, width="stretch")
     cov = C.read_csv("results/tables/coverage.csv")
     cv = cov[(cov.dataset == ds) & (cov.period == period) & (cov.coverage_pct < 100)]
@@ -119,7 +120,7 @@ with tabs[2]:
         z = fv[fv.model_id == m]
         fig.add_trace(go.Scatter(x=z.target_date, y=z.prediction * 1e4, name=C.friendly(m), line=dict(color=C.model_colour(m), width=1.3)))
     fig.update_layout(height=420, yaxis_title="y × 1e4", margin=dict(l=10, r=10, t=10, b=10), legend=dict(orientation="h"))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto="Grey is the realised target; each line is a model's forecast for the same days. Look at whether forecasts spike with the grey peaks and how quickly they relax afterwards.")
     if models:
         res, n = C.matched_scores(sel(fc), models)
         base = sel(fc)
@@ -153,7 +154,7 @@ with tabs[3]:
     if clip:
         fig.update_yaxes(range=[-40, 15])
     fig.update_layout(height=420, margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Bars show how much each model improves on (or loses to) the reference, in percent. Positive gains are better; the spread across markets shows how consistent the effect is.')
     show = z[["dataset_l", "slot", "model_id", "control", "n_common", "requested", "gain_pct", "RMSE_ratio",
               "descriptive_CI_low", "descriptive_CI_high"]]
     st.dataframe(show.style.format({"gain_pct": "{:+.2f}", "RMSE_ratio": "{:.4f}", "descriptive_CI_low": "{:+.1f}",
@@ -193,7 +194,7 @@ with tabs[4]:
                      color_discrete_map={"Student-t": C.DIST_COLOURS["student_t"], "GED": C.DIST_COLOURS["ged"]},
                      labels={"pct": "MSE change vs Gaussian (%), negative = better", "group": ""})
         fig.update_layout(height=700, margin=dict(l=10, r=10, t=10, b=10))
-        st.plotly_chart(fig, width="stretch")
+        C.show(fig, howto='Each row is one dataset / pipeline / period group. The bar is the percent change in MSE when Student-t (red) or GED (green) replaces the Gaussian innovation. Negative = the heavier-tailed distribution forecasts better; positive = worse.')
     fs = C.read_csv("distribution/fit_status_summary.csv")
     st.markdown(f"Fit attempts (all periods incl. validation): {int(fs.attempts.sum()):,}; failed: {int(fs.failures.sum())}; "
                 f"GED shape-guard flags: {int(fs.guard_flags.sum())}.")
@@ -252,7 +253,7 @@ with tabs[7]:
                    hover_data=["dataset"], labels={"improvement_pct": "% lower MSE than default"})
     fig.add_hline(y=0)
     fig.update_layout(height=380, margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(fig, width="stretch")
+    C.show(fig, howto='Each dot is one comparison scenario; the vertical axis is the percent improvement. Dots above 0 are improvements, below 0 worse. A cloud centred on 0 means no systematic gain.')
     fp = C.read_csv("results/run/frozen_parameter_choices.csv")
     fp["dataset"] = fp.dataset.map(C.label)
     st.markdown("**Setting chosen on validation for each pipeline** (`frozen_parameter_choices.csv`)")
@@ -268,3 +269,49 @@ with tabs[8]:
                  hide_index=True, width="stretch")
     st.caption("First fit at the end of training (origin 2009-12-31). 12-lag auxiliary F tests; Ljung-Box Q(24) with fitdf = p+q. "
                "GARCH rows use standardised innovations. 5% decisions; F references are approximate on estimated residuals.")
+
+# ============================================================================ head to head
+with tabs[9]:
+    st.markdown("Pick any two saved models and compare them day by day on the dates where both produced a forecast. "
+                "Everything here is computed in the app from the saved R forecasts.")
+    c1, c2, c3, c4 = st.columns(4)
+    hper = c1.radio("Period", ["test", "later"], format_func=lambda p: C.PERIOD_LABELS[p], key="h2h_per")
+    hds_opts = [d for d in C.DATASETS if hper == "test" or d in C.STOCKS]
+    hds = c2.selectbox("Dataset", hds_opts, format_func=C.label, key="h2h_ds")
+    hfc = C.forecasts(hds, hper)
+    hall = sorted(hfc.model_id.unique(), key=lambda m: (not m.startswith(("raw", "dwt", "modwt")), m))
+    ma = c3.selectbox("Model A", hall, index=hall.index("raw_garch") if "raw_garch" in hall else 0, format_func=C.friendly, key="h2h_a")
+    mb = c4.selectbox("Model B", hall, index=hall.index("modwt_garch") if "modwt_garch" in hall else 1, format_func=C.friendly, key="h2h_b")
+    if ma == mb:
+        st.info("Choose two different models.")
+    else:
+        za = hfc[hfc.model_id == ma]; za = za[C.valid_mask(za)].set_index("target_date")
+        zb = hfc[hfc.model_id == mb]; zb = zb[C.valid_mask(zb)].set_index("target_date")
+        j = za[["prediction", "actual"]].join(zb[["prediction"]], lsuffix="_a", rsuffix="_b", how="inner").dropna()
+        if len(j) < 5:
+            st.warning("Too few common dates.")
+        else:
+            ea = (j.prediction_a - j.actual) ** 2
+            eb = (j.prediction_b - j.actual) ** 2
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("Common days", f"{len(j):,}")
+            m2.metric(f"RMSE A × 1e4", f"{np.sqrt(ea.mean()) * 1e4:.4f}")
+            m3.metric(f"RMSE B × 1e4", f"{np.sqrt(eb.mean()) * 1e4:.4f}")
+            m4.metric("B better on", f"{(eb < ea).mean():.1%} of days")
+            cum = (ea - eb).cumsum() * 1e8
+            fig = go.Figure(go.Scatter(x=cum.index, y=cum.values, line=dict(color=C.MODWT), fill="tozeroy"))
+            fig.add_hline(y=0)
+            fig.update_layout(height=340, yaxis_title="cumulative (error² A − error² B) × 1e8", margin=dict(l=10, r=10, t=10, b=10))
+            C.show(fig, howto="The line adds up, day by day, how much squared error model A makes minus model B. "
+                              "A rising line means B is winning (A is making larger errors); falling means A is winning. "
+                              "Sudden steps come from a few extreme days that dominate the squared-error loss.")
+            sc = go.Figure(go.Scatter(x=j.prediction_a * 1e4, y=j.prediction_b * 1e4, mode="markers",
+                                      marker=dict(size=4, color=C.DWT, opacity=0.5)))
+            lim = float(max(j.prediction_a.max(), j.prediction_b.max()) * 1e4)
+            sc.add_trace(go.Scatter(x=[0, lim], y=[0, lim], mode="lines", line=dict(color=C.GREY, dash="dot")))
+            sc.update_layout(height=340, showlegend=False, xaxis_title="forecast A × 1e4", yaxis_title="forecast B × 1e4",
+                             margin=dict(l=10, r=10, t=10, b=10))
+            C.show(sc, howto="Each dot is one day: model A's forecast (x) against model B's (y). Dots on the dotted diagonal mean the "
+                             "two models agree; dots above it mean B forecast higher volatility than A that day.")
+            C.download(j.reset_index(), f"head_to_head_{hds}_{hper}.csv", "Download daily forecasts (CSV)")
+
