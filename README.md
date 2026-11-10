@@ -5,7 +5,7 @@ implementation, one configuration, six prepared datasets, the parallel experimen
 runner, tests, the Innovation-distribution extension (`Distribution/`) and the
 results of the final run.
 ## App Link:
-[Volatility Forecasting Using Wavelet Transformation](https://volatility-forecasting-using-wavelet-transformation.streamlit.app/)
+[Volatility Forecasting Using Wavelet Transformation](https://volatility-forcasting-using-wavelet-transformation.streamlit.app/)
 ## Run
 
 Requirements: R 4.6.x with the recommended package `nnet`. No other R package,
