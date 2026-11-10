@@ -4,7 +4,10 @@ Code for the DA-3041 Group 9 project. It contains one model
 implementation, one configuration, six prepared datasets, the parallel experiment
 runner, tests, the Innovation-distribution extension (`Distribution/`) and the
 results of the final run.
-
+# App Link:
+```sh
+https://volatility-forcasting-using-wavelet-transformation.streamlit.app/
+```
 ## Run
 
 Requirements: R 4.6.x with the recommended package `nnet`. No other R package,
