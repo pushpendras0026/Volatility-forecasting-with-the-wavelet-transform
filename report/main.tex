@@ -1,5 +1,3 @@
-%%%%%%%% DA-3041 Group 9 final report, ICML 2018 style %%%%%%%%%%%%%%%%%
-
 \documentclass{article}
 
 \usepackage{microtype}
@@ -12,116 +10,139 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
 \usepackage{hyperref}
+\usepackage{microtype}
+\setlength{\emergencystretch}{2em}
 
 \newcommand{\theHalgorithm}{\arabic{algorithm}}
 
 \usepackage[accepted]{icml2018}
 
-% course report, not an ICML publication: replace the "appearing in" footnote
 \makeatletter
-\renewcommand{\ICML@appearing}{DA-3041 Applied Time Series Analysis course project, IIT Guwahati, 2026.}
+\renewcommand{\ICML@appearing}{DA-3041 Applied Time Series Analysis course project}
 \makeatother
-
-\icmltitlerunning{Wavelet + ARMA--GARCH Volatility Forecasting}
 
 \begin{document}
 
 \twocolumn[
-\icmltitle{Does Splitting Returns with Wavelets Help GARCH Forecast Volatility?\\
-A Re-implementation and Extension on Six Markets}
+\icmltitle{Volatility Forecasting with the Wavelet Transform: GARCH Model}
+
+% Optional sub-header for course project details
+\centerline{\large DA3041 Course Project --- Group 9}
+\vskip 0.2in
 
 \begin{icmlauthorlist}
-\icmlauthor{Neeharika}{iitg}
-\icmlauthor{Pratyaksha Jha}{iitg}
-\icmlauthor{Pushpendra Singh}{iitg}
-\icmlauthor{Somita Agarwal}{iitg}
+    \icmlauthor{Neeharika Banothu}{dept}
+    \icmlauthor{Pratyaksha Jha}{dept}
+    \icmlauthor{Pushpendra Singh}{dept}
+    \icmlauthor{Somita Agarwal}{dept}
 \end{icmlauthorlist}
 
-\icmlaffiliation{iitg}{Indian Institute of Technology Guwahati, India. DA-3041 Applied Time Series Analysis, Group 9. Roll numbers: 240150008, 240150025, 240150026, 240150035}
+\icmlaffiliation{dept}{Mehta Family School of Data Science and Artificial Intelligence, IIT Guwahati}
+% Adjust affiliation above to match your actual department/institution
 
+% Roll numbers listed cleanly as corresponding emails or equal contribution notes
 \icmlcorrespondingauthor{Pushpendra Singh}{github.com/pushpendras0026}
+\icmlcorrespondingauthor{Group 9}{240150008, 240150025, 240150026, 240150035}
+
+% You may provide the keywords for the topic:
+\icmlkeywords{Volatility Forecasting, Wavelet Transform, GARCH, DA3041}
+
+% \icmlaffiliation{iitg}{Indian Institute of Technology Guwahati, India. DA-3041 Applied Time Series Analysis, Group 9. Roll numbers: 240150008, 240150025, 240150026, 240150035}
+
+
 
 \icmlkeywords{volatility forecasting, GARCH, wavelets, DWT, MODWT, time series}
 
 \vskip 0.3in
 ]
-
 \printAffiliationsAndNotice{}
-
 \begin{abstract}
-Forecasting volatility is important for risk management, but daily returns are noisy, fat tailed and their variance keeps changing. Our assigned paper, \citet{ismail2016}, first transforms the returns with a Haar-type MODWT, fits ARMA and GARCH(1,1) to the transformed series, and compares this MODWT-GARCH(1,1) with a plain GARCH(1,1) on four African stock indices. They report that MODWT-GARCH gives the better volatility forecasts. In this project we wrote the whole method again from scratch in base R and tested it in a strict rolling, one-step-ahead setup with no look-ahead. We use three of the paper's African markets (South Africa, Tunisia, Nigeria) and three stocks (Infosys, IBM, Google). Training is 2004--2009, validation is 2010--2011 and the test is 2012--2014. The stocks also get a later check on 2015--2025. All three pipelines (raw returns, paired Haar DWT and Haar MODWT) use an ARMA mean picked by AIC and a GARCH(1,1) variance, and they all forecast the same target, the next squared deviation from the past 20-day mean.
+Forecasting volatility is important for risk management, but daily stock returns are difficult to predict because they are noisy and their variance keeps changing.In the paper \citet{ismail2016} used Haar-type MODWT with ARMA and GARCH(1,1) to forecast volatility in four African stock markets and found that MODWT-GARCH performed better than GARCH(1,1).
 
-We then added things that the paper did not do: Student-t and GED innovations (because every series fails the Jarque--Bera normality test, the kurtosis goes from 5.2 to 522), a structural MODWT order rule, 24 wavelet component models on the target itself, three equal-weight ensembles, a small neural network (MLP) with three seeds, and a sensitivity study on window, refit cadence, information criterion and order cap.
+We implemented the main methods in R and compared them using rolling one-step-ahead forecasts.We used three African markets (South Africa, Tunisia and Nigeria) and three additional stocks (Infosys, IBM and Google). The data was divided into training (2004–2009), validation (2010–2011) and testing (2012–2014) data. We compared three methods: original returns, paired Haar DWT and Haar MODWT. For each method, we used ARMA to model the mean and GARCH(1,1) to model the variance. We chose the ARMA order using AIC. We kept the target the same for all three methods. It was the squared difference between the next day's return and the average return of the previous 20 days. We also tested the three additional stocks using data from 2015 to 2025.
 
-Our main finding is that the wavelet step helps much less than the paper suggests. On the 2012--2014 test, MODWT-GARCH is within 3\% MSE of plain GARCH on all six series. A paired Haar DWT version is better on Nigeria (9.3\% lower MSE), Tunisia (7.9\%, but with a wide uncertainty interval) and Infosys (3.0\%), and about the same on the other three. Fat-tailed innovations give small but steady gains: Student-t or GED has the lowest MSE in 23 of 27 held-out groups, and the gain is largest on Tunisia, the fattest-tailed series. Ensembles are mixed, and the MLP is worse than GARCH everywhere. So our honest conclusion is that a well-tuned GARCH(1,1) is very hard to beat, and wavelets are a useful option for some markets but not a general improvement.
+We also tried Student-t and GED distributions, a structural MODWT order rule, 24 wavelet component models, three equal-weight ensembles and a small MLP with three random seeds. We performed sensitivity analysis using different window lengths, refit frequencies, information criteria and order limits. The Jarque-Bera test rejected normality for all six return series, with kurtosis ranging from 5.24 to 522.53.
+
+Our results showed that MODWT-GARCH had an MSE within 3\% of plain GARCH on all six datasets during 2012–2014. Paired Haar DWT gave lower MSE on Nigeria (9.3\%), Tunisia (7.9\%) and Infosys (3.0\%), although Tunisia had a wide uncertainty interval. Student-t or GED gave the lowest MSE in 23 out of 27 held-out groups, with the largest improvement on Tunisia. Ensembles gave mixed results, while MLP performed worse than GARCH.
+
+From our results, we saw that GARCH(1,1) was already performing well, and it was difficult for the other methods to do better. Wavelet methods gave better results for some datasets, but they did not work better in all cases.
 \end{abstract}
+
 
 %=====================================================================
 \section{Introduction}
 \label{sec:intro}
+Volatility tells us how much a stock price changes over time. Banks and fund managers use volatility forecasts for tasks such as Value-at-Risk, portfolio weights and option pricing. Forecasting volatility is not easy because daily stock returns are noisy, often have extreme values (fat tails), and their variance keeps changing. We can also observe that large movements tend to occur close to each other, which is known as volatility clustering.
 
-Volatility tells us how much a price moves around. Banks and fund managers use volatility forecasts for Value-at-Risk, for portfolio weights and for option pricing, so a better forecast has a direct money value. The problem is that daily returns are mostly noise. The mean is close to zero, big moves come in clusters (a calm 2005 and a wild 2008), and the distribution has much fatter tails than a normal one.
+GARCH is commonly used to forecast volatility because it considers past shocks and variance. However, it may not capture all the movements that occur at different time scales. To address this, \citet{ismail2016} used Haar-type MODWT along with ARMA and GARCH(1,1) to study four African stock markets: Kenya, Nigeria, South Africa and Tunisia. They reported better forecasting results than the ordinary GARCH model.
 
-The classic tool is GARCH \cite{engle1982,bollerslev1986}. It models today's variance from yesterday's shock and yesterday's variance, and it captures clustering quite well. \citet{ismail2016} argue that a return series mixes moves at many time scales, from day-to-day noise to slow trends, and that a wavelet filter can denoise the returns before GARCH is fitted. They test this on four African stock indices (Kenya, Nigeria, South Africa, Tunisia, 2000--2014) and find that MODWT-GARCH(1,1) has lower AIC on three of the four markets and smaller forecast errors than GARCH(1,1) on all four. \citet{rubio2023} report a similar gain from wavelet + ARIMA--GARCH hybrids for the volatility of Tesla stock.
+We implemented the main methods in R and compared their forecasting performance. The main parts of our work are as follows:
 
-Our goal was to check this claim carefully. Our plan was:
 \begin{enumerate}
-\item Re-build the three pipelines of the paper (raw, DWT, MODWT with ARMA--GARCH) ourselves, in base R, with no wavelet or GARCH packages, so we understand every step.
-\item Test them in a fair way: one-step-ahead rolling forecasts, every model sees only the past, all model choices are frozen on a validation period before the test, and all models are scored on exactly the same dates.
-\item Use three of the paper's four African markets plus three large stocks from India and the USA, to see if the result travels. (Our Kenya NSE-20 data only starts in 2010, which is too short for our training period, so Kenya is left out.)
-\item Add our own extensions: fat-tailed innovations, component models, ensembles, an MLP and a sensitivity study.
-\end{enumerate}
+    \item We implemented three main approaches: GARCH on raw returns, paired Haar DWT-GARCH and Haar MODWT-GARCH.
 
-The rest of the report is like this. Section~\ref{sec:background} reviews the background. Section~\ref{sec:approach} explains the method of the paper as we understood and implemented it. Section~\ref{sec:ext} describes our extensions. Section~\ref{sec:exp} gives the experiments and results and Section~\ref{sec:conc} concludes.
+    \item We compared the methods using rolling one-step-ahead forecasts. In this approach, each forecast uses only the observations available up to that point. We used the validation period to decide the model settings and compared the methods on common test dates.
+
+    \item We used three African markets (South Africa, Tunisia and Nigeria) and three additional stocks (Infosys, IBM and Google). We did not include Kenya because the available NSE-20 data starts only in 2010. The three additional stocks were also tested using a later period, from 2015 to 2025.
+
+    \item We also tried some additional experiments to see if they could improve the results.These included Student-t and GED distributions,wavelet component models,equal-weight ensembles,an MLP and sensitivity analysis.
+\end{enumerate}
 
 %=====================================================================
 \section{Background and Related Work}
 \label{sec:background}
 
-\textbf{ARMA.} An ARMA($p,q$) model writes the return as a linear function of its own past values and past shocks, $\Phi(B)r_t=c+\Theta(B)\varepsilon_t$ \cite{box2015}. It is good for the mean, but it assumes the shock variance is constant, so it can not describe volatility clustering.
+\textbf{ARMA.} An ARMA($p,q$) model is used to describe the behaviour of a time series using its previous values and previous errors (
+$\Phi(B)r_t=c+\Theta(B)\varepsilon_t$). ARMA is used mainly to model the mean of the return series. However, it assumes constant error variance and cannot capture volatility clustering properly. In our project, ARMA is used to model the mean before applying GARCH to the residuals. The ARMA order is selected using the Akaike Information Criterion (AIC).
 
-\textbf{GARCH.} \citet{engle1982} let the variance depend on past squared shocks (ARCH) and \citet{bollerslev1986} added the past variance itself. For GARCH(1,1),
+\textbf{GARCH.} \citet{engle1982} introduced ARCH, where the current variance depends on previous squared errors. Later, \citet{bollerslev1986} extended this model by including previous variance, which resulted in the GARCH model. The GARCH(1,1) model can be written as
 \begin{equation}
 \varepsilon_t=\sqrt{h_t}\,z_t,\qquad h_t=\omega+\alpha\varepsilon_{t-1}^2+\beta h_{t-1},
 \label{eq:garch}
 \end{equation}
-with $\omega>0$, $\alpha,\beta\ge0$ and $\alpha+\beta<1$ for a finite long-run variance. \citet{hansen2005} compared hundreds of volatility models and found that it is surprisingly hard to beat GARCH(1,1), which is something we also saw. The standard choice is Gaussian $z_t$, but real returns have fat tails, so \citet{bollerslev1987} used a Student-t and \citet{nelson1991} used the generalized error distribution (GED).
+with $\omega>0$, $\alpha,\beta\ge0$ and $\alpha+\beta<1$ for covariance stationarity. GARCH is useful because it captures volatility clustering, where large changes tend to be followed by large changes and small changes tend to be followed by small changes. However, financial returns often contain extreme values and fat tails, which are not always well described by a normal distribution. \citet{hansen2005} showed that it is difficult for other models to consistently outperform GARCH(1,1). To handle fat-tailed returns, \citet{bollerslev1987} used the Student-t distribution, while \citet{nelson1991} introduced the Generalized Error Distribution (GED).
 
-\textbf{Wavelets.} A wavelet transform splits a signal into a smooth approximation $A$ (low frequency) and details $D$ (high frequency) by passing it through a low-pass and a high-pass filter \cite{mallat1989}. The discrete wavelet transform (DWT) keeps every second value after filtering, so each level halves the length. The maximal overlap DWT (MODWT) does not downsample. It keeps one coefficient per time point, works for any length and does not depend on where the series starts \cite{percival2000}. With the Haar filter, the simplest one, the first-level coefficients are just scaled sums and differences of neighbouring values.
+\textbf{Wavelets.} Wavelet transformation is used to analyse a signal at different time scales by separating it into Approximation component(A), which represents smoother movements, and Detail component(D), which represents short-term changes \citet{mallat1989}. In our project, we use two methods: Discrete Wavelet Transform (DWT) and Maximal Overlap Discrete Wavelet Transform (MODWT). DWT uses downsampling, whereas MODWT keeps the same number of coefficients at each level, preserving the time--alignment information of the series. We use the Haar wavelet to find the average and difference between nearby values.
 
-\textbf{Wavelet + GARCH hybrids.} \citet{ismail2016} compute a first-level Haar-type wavelet series from the returns, $w=(r_{2k}-r_{2k-1})/\sqrt2$, choose an ARMA order for it by AIC (they also report serial-correlation and ARCH-LM tests for every candidate), fit GARCH(1,1), and compare one-step variance forecasts with plain ARMA--GARCH(1,1) using MSE against a volatility proxy, the squared deviation of the return from a moving-average expected return. They also report moments, Ljung--Box $Q(24)$ and Jarque--Bera tests of the returns. \citet{rubio2023} decompose Tesla volatility with the DWT into approximation and detail parts, model them with ARIMA and GARCH in two hybrid ways, and check normality (Jarque--Bera, skewness, kurtosis), stationarity (ADF, KPSS) and independence (BDS) first. Both papers report that the hybrids do better. One thing we noticed is that the papers do not say exactly how the forecast of a wavelet coefficient is turned back into a forecast of the return variance. This step turned out to be the most important design choice in our work.
+\textbf{Wavelet + GARCH hybrids.} \citet{ismail2016} studied the use of Haar-type MODWT along with ARMA and GARCH(1,1) for forecasting volatility in four African stock markets: Kenya, Nigeria, South Africa and Tunisia. They first transformed the return series using MODWT, selected the ARMA order using AIC and then applied GARCH(1,1) to the transformed series. They compared the results with a normal GARCH(1,1) model and reported improvements in volatility forecasting. They also used statistical tests such as Ljung-Box and ARCH-LM to examine the return series and model residuals. Another study by  \citet{rubio2023} explored wavelet-based ARIMA-GARCH models for forecasting the volatility of Tesla stock.
 
-\textbf{Measuring accuracy.} True volatility is never observed, so we need a proxy. \citet{patton2011} shows that MSE on a squared-return type proxy still ranks models correctly in expectation, even though the proxy is noisy. We use MSE (and RMSE) on such a proxy for this reason.
+In our project, we independently implemented three main forecasting approaches: raw returns with GARCH, paired Haar DWT-GARCH and Haar MODWT-GARCH. In the paired Haar DWT approach, neighbouring returns are grouped into pairs and transformed into approximation and detail values. In our MODWT implementation, we use overlapping differences between consecutive returns, calculated as, $w=(r_{2k}-r_{2k-1})/\sqrt2$.We then apply ARMA and GARCH(1,1) to the transformed series and convert the forecasts back to the original return scale. This allows us to compare the wavelet-based approaches with the ordinary GARCH model using the same forecasting target.
+
+We also extended the main experiments by testing 24 wavelet component models on the target series itself. These models use DWT and MODWT with Haar, db4 and db6 wavelet filters at different decomposition levels. The component models were tested using ARMA and GARCH-based approaches to see whether modelling the different components separately could improve forecasting accuracy.
+
+\textbf{Measuring accuracy.} Since actual volatility cannot be directly observed, we use the next squared deviation from the previous 20-day mean as the target. MSE and RMSE are used to compare forecasts. We also use Jarque-Bera, Ljung-Box and ARCH-LM tests to check normality, autocorrelation and remaining ARCH effects.
 
 %=====================================================================
-\section{Approach: the Paper's Method as We Implemented It}
+\section{Approach}
 \label{sec:approach}
 
 \subsection{Target and rolling protocol}
 
-Let $P_t$ be the closing price and $r_t=\ln P_t-\ln P_{t-1}$ the daily log return. All models forecast the same target,
+Let $P_t$ be the closing price and $r_t=\ln P_t-\ln P_{t-1}$ be the daily log return. All three models predict the same target, which is the squared deviation of the next day's return from the previous 20-day average return:
 \begin{equation}
 y_{t+1}=\bigl(r_{t+1}-\bar r_{t}^{(20)}\bigr)^2,\quad \bar r_t^{(20)}=\tfrac{1}{20}\textstyle\sum_{i=0}^{19}r_{t-i},
 \label{eq:target}
 \end{equation}
-which is the squared deviation of tomorrow's return from the mean of the last 20 returns. This follows the volatility proxy of \citet{ismail2016}, the squared deviation from a moving-average expected return; the 20-day window is our choice. The mean $\bar r_t^{(20)}$ is known at time $t$, so there is no leakage. Using one target for everyone is the only way to compare raw, DWT and MODWT models fairly.
+This target is used for all three methods so that their forecasts can be compared fairly. Since the 20-day average is already known at time (t), there is no future information in the target definition.
 
-If a model gives a conditional mean $\mu_{t+1}$ and variance $h_{t+1}$ for the next return, the forecast of the target is
+Each model forecasts one day ahead using the past observations and is re-estimated every 20 trading days. Between refits, the model parameters remain fixed, but the forecasts use the latest available observations. We also checked for data leakage to make sure future values do not affect earlier forecasts.
+
+If a model gives the next return's conditional mean  $\mu_{t+1}$ and variance $h_{t+1}$  its forecast of the target is
 \begin{equation}
 \hat y_{t+1}=h_{t+1}+\bigl(\mu_{t+1}-\bar r_t^{(20)}\bigr)^2 ,
 \label{eq:restore}
 \end{equation}
 because $E[(r-m)^2]=\mathrm{Var}(r)+(E r-m)^2$.
 
-Forecasts are made one step ahead, every trading day. Each model is fitted on a rolling window of the last 1,024 observations and is re-estimated every 20 days. Between refits the parameters stay fixed but the filter still updates with every new observation. A forecast for day $t+1$ only uses data up to day $t$. This is checked by a leakage test in our code: changing future values does not change any past forecast.
+This follows from the expected squared deviation being equal to the variance plus the squared difference between the mean and the reference value.
 
 \subsection{Mean and variance models}
 
-For every input series we pick the ARMA($p,q$) order with $p,q\le3$ by AIC $=-2\ell+2k$ \cite{akaike1974} on the last 1,024 training returns. The ARMA is estimated by Gaussian maximum likelihood. Then a GARCH(1,1) (Eq.~\ref{eq:garch}) is fitted on the ARMA residuals. So it is a two-step estimate and not a joint ARMA--GARCH likelihood; we chose this because it is simpler and more stable. The orders picked for the raw returns at the end of training were (3,1) for South Africa, (2,0) Tunisia, (0,3) Nigeria, (0,3) Infosys, (2,2) IBM and (3,2) Google. The GARCH persistence $\alpha+\beta$ was between 0.93 and 0.997, so volatility is very persistent in all six series.
+For each input series, we select the ARMA($p,q$) order with $p,q\le3$ using AIC $=-2\ell+2k$ on the latest 1,024 observations in the training window. AIC helps us choose a model that fits the data without using too many parameters. The ARMA model is estimated using Gaussian maximum likelihood, and GARCH(1,1) is then fitted to its residuals. We use this two-step approach because it is simpler to implement and compare. For the raw returns, the selected ARMA orders are (3,1) for South Africa, (2,0) for Tunisia, (0,3) for Nigeria, (0,3) for Infosys, (2,2) for IBM and (3,3) for Google.The estimated GARCH persistence $\alpha+\beta$  ranges from 0.93 to 0.997 across the six series, showing that volatility shocks have a lasting effect.
 
 \subsection{The three pipelines}
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[>=Stealth, font=\scriptsize, node distance=3mm and 2mm,
  box/.style={draw, rounded corners=2pt, align=center, minimum height=5mm, inner sep=2pt}]
@@ -145,22 +166,37 @@ For every input series we pick the ARMA($p,q$) order with $p,q\le3$ by AIC $=-2\
 \label{fig:pipe}
 \end{figure}
 
-Figure~\ref{fig:pipe} shows the three pipelines. The paper's wavelet formula $w=(r_{2k}-r_{2k-1})/\sqrt2$ uses non-overlapping pairs of returns, which is the first-level Haar DWT detail, while the name MODWT normally means the overlapping (undecimated) version. Since the paper is not fully clear here, we implemented both: the paired Haar DWT exactly as in their formula, and the overlapping Haar MODWT. The rolling protocol, the restoration step and the common target are our own design choices, needed to turn the method into a fair out-of-sample forecast.
+Figure~\ref{fig:pipe} shows the three approaches used in our project. The raw GARCH model uses the original returns, while the other two first apply Haar wavelet transformations. We implemented both paired Haar DWT and overlapping Haar MODWT to compare their performance.
 
-\textbf{Raw GARCH.} ARMA--GARCH directly on $r_t$. This is the benchmark.
+\textbf{Raw GARCH.} This is our basic model. We directly apply ARMA to the original returns to estimate the mean and then GARCH(1,1) to estimate the variance.
 
-\textbf{MODWT-GARCH.} The first-level Haar MODWT detail is $w_t=(r_t-r_{t-1})/2$. We model $w_t$ with ARMA--GARCH. Since $r_{t+1}=r_t+2w_{t+1}$ and $r_t$ is already known, the return moments are $\mu_r=r_t+2\mu_w$ and $h_r=4h_w$.
+\textbf{MODWT-GARCH.} Here, we first calculate the Haar detailvalues using overlapping differences between consecutive returns:$w_t=(r_t-r_{t-1})/2$. We then model this series using ARMA-GARCH. Since $r_{t+1}=r_t+2w_{t+1}$ and $r_t$is already known, the forecast mean and variance of theoriginal return are obtained as $\hat{\mu}_{r,t+1}=r_t+2\hat{\mu}_{w,t+1}$ and
+$\hat{h}_{r,t+1}=4\hat{h}_{w,t+1}$.
 
-\textbf{Paired DWT-GARCH.} The DWT works on non-overlapping pairs $(u_k,v_k)$ of returns, giving an approximation $a_k=(u_k+v_k)/\sqrt2$ and a detail $d_k=(v_k-u_k)/\sqrt2$. These two series are half as long as the returns. We fit one ARMA--GARCH to each, which gives one-step moments $(\mu_a,h_a)$ and $(\mu_d,h_d)$ for the next pair $(r_t,r_{t+1})$. The tricky part is that the first return $r_t$ of that pair is already observed when we forecast $r_{t+1}$. So we should condition on it. Because Haar is orthonormal we treat $a$ and $d$ as conditionally uncorrelated and jointly normal. Then $s=a-d=\sqrt2\,r_t$ is known and
+
+\textbf{Paired DWT-GARCH.} In this approach, we group consecutive returns into non-overlapping pairs $(u_k,v_k)$ and calculate their Haar approximation and detail values: $a_k=(u_k+v_k)/\sqrt{2}$ and
+$d_k=(v_k-u_k)/\sqrt{2}$. We fit separate ARMA-GARCH models to both series to obtain their forecast means and variances $(\mu_a,h_a)$ and $(\mu_d,h_d)$. The important part is that the first return $r_t$ of the next pair is already known when forecasting $r_{t+1}$. So, we use this information to calculate
+the conditional forecast. Assuming the approximation and detail are jointly normal and uncorrelated, we get $s=a-d=\sqrt{2}r_t$, and the conditional detail mean is
 \begin{align}
-E[d\mid s]&=\mu_d-\frac{h_d}{h_a+h_d}\bigl(s-(\mu_a-\mu_d)\bigr),\\
-\mu_r&=r_t+\sqrt2\,E[d\mid s],\qquad h_r=\frac{2h_ah_d}{h_a+h_d}.
+E[d\mid s]
+&=\mu_d-\frac{h_d}{h_a+h_d}
+\left(s-(\mu_a-\mu_d)\right).
 \end{align}
-A good sanity check: if the returns are i.i.d.\ with mean $m$ and variance $\sigma^2$, then $h_a=h_d=\sigma^2$, $\mu_a=\sqrt2m$, $\mu_d=0$, and the formulas give back $\mu_r=m$ and $h_r=\sigma^2$, the same as the raw model. Our unit tests check this on simulated data. If we ignore that $r_t$ is known and just use $h_r=2h_d$, the variance forecast is too large by a big factor, so this conditioning step really matters.
+Using this, the forecast mean and variance of the next return are calculated as
+\begin{align}
+\hat{\mu}_r &= r_t+\sqrt{2}E[d\mid s],\\
+\hat{h}_r &= \frac{2h_ah_d}{h_a+h_d}.
+\end{align}
+
+
 
 \subsection{Evaluation}
+We use MSE as the main measure and RMSE
+to compare the forecasts on the test data. We also calculate the percentage improvement over raw GARCH using $100(1-\mathrm{MSE}_{\text{model}}/\mathrm{MSE}_{\text{raw}})$.A positive value means that the model performs better than raw GARCH. Some model fits fail because the optimiser does
+not converge, so we compare models only on dates where all
+of them have valid forecasts. This can lead to different
+numbers of test observations in different result tables.
 
-The main score is the MSE (and RMSE) of $\hat y$ against $y$ on the test days. We report the gain of a model over raw GARCH as $100\,(1-\mathrm{MSE}_{\text{model}}/\mathrm{MSE}_{\text{raw}})$, so positive means better. Some fits fail on some days (the optimiser does not converge). Because of this, every comparison is done on matched dates only: the dates on which all models in that table have a forecast. This is why the same model can have a slightly different number in two tables; each table says which dates it uses. As a rough guide for uncertainty we also compute paired moving-block bootstrap intervals \cite{kunsch1989}, but we use them only as a description, not as a formal test.
 
 %=====================================================================
 \section{Our Extensions}
